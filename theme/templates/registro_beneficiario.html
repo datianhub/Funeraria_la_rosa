@@ -1,0 +1,169 @@
+<dialog id="modal_registro_beneficiario" class="modal">
+    <div class="modal-box w-11/12 max-w-5xl h-5/6 p-6 rounded-2xl shadow-xl bg-amber-50 overflow-hidden">
+    
+        <div class="flex justify-between items-start border-b border-gray-100 pb-4 mb-4 h-16">
+            <div>
+                <h3 class="font-bold text-xl text-gray-900">Registrar Nuevo Beneficiario</h3>
+                <p class="text-sm text-[#5a2a3b] font-medium mt-0.5">Asociado al titular actual</p>
+            </div>
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost text-gray-400 hover:text-gray-600">✕</button>
+            </form>
+        </div>
+
+        <div class="h-[calc(100%-5rem)] w-full block">
+            
+            <form id="form-registro-beneficiario" action="{% url 'beneficiario_registro' %}" method="POST" class="grid grid-cols-3 gap-4 h-full w-full content-start overflow-y-auto p-2">
+                {% csrf_token %}
+                
+                {{ form_beneficiario.titular }}
+                
+
+                <div class="form-group col-span-2">
+                    <label class="block mb-1.5 text-sm font-medium text-gray-700" for="{{ form_beneficiario.nombre_completo.id_for_label }}">Nombre Completo:</label>
+                    {{ form_beneficiario.nombre_completo }}
+                    {% if form_beneficiario.nombre_completo.errors %}
+                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.nombre_completo.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group col-span-1">
+                    <label class="block mb-1.5 text-sm font-medium text-gray-700" for="{{ form_beneficiario.cedula.id_for_label }}">Cédula:</label>
+                    {{ form_beneficiario.cedula }}
+                    {% if form_beneficiario.cedula.errors %}
+                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.cedula.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group col-span-1">
+                    <label class="block mb-1.5 text-sm font-medium text-gray-700" for="{{ form_beneficiario.parentesco.id_for_label }}">Parentesco:</label>
+                    {{ form_beneficiario.parentesco }}
+                    {% if form_beneficiario.parentesco.errors %}
+                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.parentesco.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group col-span-1">
+                    <label class="block mb-1.5 text-sm font-medium text-gray-700" for="{{ form_beneficiario.edad_afiliacion.id_for_label }}">Edad de Afiliación:</label>
+                    {{ form_beneficiario.edad_afiliacion }}
+                    {% if form_beneficiario.edad_afiliacion.errors %}
+                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.edad_afiliacion.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group col-span-1">
+                    <label class="block mb-1.5 text-sm font-medium text-gray-700" for="{{ form_beneficiario.edad_actual.id_for_label }}">Edad Actual: </label>
+                    {{ form_beneficiario.edad_actual }}
+                    {% if form_beneficiario.edad_actual.errors %}
+                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.edad_actual.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group col-span-1">
+                    <label for="{{ form_beneficiario.mascota.id_for_label }}" class="ml-2 text-sm font-medium text-gray-900">¿Es una mascota?</label>
+                        {{ form_beneficiario.mascota }}
+                    {% if form_beneficiario.mascota.errors %}
+                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.mascota.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group col-span-1 ">
+                    <label for="{{ form_beneficiario.tipo_mascota.id_for_label }}" class="ml-2 text-sm font-medium text-gray-900">Tipo de mascota</label>
+                    {{ form_beneficiario.tipo_mascota}}
+                    {% if form_beneficiario.tipo_mascota.errors %}
+                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.tipo_mascota.errors}} </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group col-span-1">
+                    <label for="{{ form_beneficiario.notas.id_for_label }}" class="ml-2 text-sm font-medium text-gray-900">Notas</label>
+                        {{ form_beneficiario.notas }}
+                    {% if form_beneficiario.tipo_mascota.errors %}
+                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.notas.errors}} </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-span-3 mt-4">
+                    <button type="submit" class="w-full bg-[#5a2a3b] hover:bg-[#461e2c] text-white font-medium py-3 px-4 rounded-lg flex justify-center items-center transition-colors">
+                        Guardar Beneficiario
+                    </button>
+                </div>
+            </form>
+            
+        </div>
+        
+    </div>
+  
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
+<script>
+    function ableFilePetType(){
+        const filePet = document.getElementById("id_mascota")
+        const filePetType = document.getElementById("id_tipo_mascota")
+
+        if(filePet.checked){
+            filePetType.disabled = false;
+        }else{
+            filePetType.disabled = true;
+            filePetType.value = ""
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const filePet = document.getElementById("id_mascota");
+        if (filePet) {
+            filePet.addEventListener("change", ableFilePetType);
+            ableFilePetType(); 
+        }
+    });
+
+    document.getElementById("form-registro-beneficiario").addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
+        const contentType = response.headers.get('Content-Type');
+
+        if (contentType && contentType.includes('application/json')) {
+            const data = await response.json();
+            if (data.success) {
+                document.getElementById('modal_registro_beneficiario').close();
+                const nombreTitular = document.getElementById('modal_titular_nombre').innerText.replace('Titular: ', '');
+                abrirModalBeneficiarios(titularSeleccionadoId, nombreTitular);
+            }
+            return;
+        }
+
+        const htmlText = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+        const nuevoForm = doc.getElementById('form-registro-beneficiario');
+
+        if (nuevoForm) {
+            form.innerHTML = nuevoForm.innerHTML;
+
+            const nuevoFilePet = document.getElementById("id_mascota");
+            if (nuevoFilePet) nuevoFilePet.addEventListener("change", ableFilePetType);
+            ableFilePetType();
+
+            const inputTitular = document.getElementById('id_titular');
+            if (inputTitular) inputTitular.value = titularSeleccionadoId;
+        }
+
+    } catch (error) {
+        console.error("Error en la petición Fetch:", error);
+    }
+});
+
+
+</script>

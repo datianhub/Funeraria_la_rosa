@@ -1,0 +1,62 @@
+<dialog id="modal_beneficiarios" class="modal">
+    <div class="modal-box max-w-2xl bg-white p-6 rounded-2xl shadow-xl">
+    
+    <div class="flex justify-between items-start border-b border-gray-100 pb-4 mb-4">
+        <div>
+            <h3 class="font-bold text-xl text-gray-900">Beneficiarios Asociados</h3>
+            <p id="modal_titular_nombre" class="text-sm text-[#5a2a3b] font-medium mt-0.5"></p>
+            <div class="mt-2">
+                <button onclick="abrirRegistroBeneficiario(titularSeleccionadoId)" class="w-min bg-[#5a2a3b] hover:bg-[#461e2c] text-white text-sm font-medium py-3 px-4 rounded-lg ">
+                   Añadir Beneficiario 
+
+                <button>
+            </div>
+        </div>
+        <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost text-gray-400 hover:text-gray-600">✕</button>
+        </form>
+
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left">
+            <thead class="text-xs uppercase tracking-wider text-gray-500 bg-gray-50">
+                <tr>
+                    <th class="py-3 px-4">Nombre Completo</th>
+                    <th class="py-3 px-4">Cédula</th>
+                    <th class="py-3 px-4">Parentesco</th>
+                    <th class="py-3 px-4">Edad</th>
+                    <th class="py-3 px-4">Fecha de Afiliación</th>
+                </tr>
+            </thead>
+            <tbody id="tabla_beneficiarios_cuerpo" class="divide-y divide-gray-100">
+                </tbody>
+        </table>
+    </div>
+    
+    <div id="modal_mensaje_estado" class="text-center py-6 text-gray-400 hidden">
+        Cargando beneficiarios...
+    </div>
+  </div>
+  
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+
+{% include "./registro_beneficiario.html" %}
+
+<script>
+    function abrirRegistroBeneficiario(titularId){
+
+    const inputTitular = document.getElementById('id_titular');
+    if (inputTitular) {
+        inputTitular.value = titularId;
+        }
+
+    const modalRegistroBeneficiario = document.getElementById('modal_registro_beneficiario');
+    if (modalRegistroBeneficiario) {
+        modalRegistroBeneficiario.showModal();
+    }
+}
+</script>
