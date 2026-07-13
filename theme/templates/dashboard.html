@@ -4,173 +4,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funeraria La Rosa - Gestión</title>
+    <title>La Rosa — Panel de Gestión</title>
     {% tailwind_css %}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
 </head>
-<body class="bg-gray-50 flex h-screen overflow-hidden text-gray-800">
+<body class="font-['Inter',sans-serif] bg-[#F7F4EE] flex h-screen overflow-hidden text-[#2C1F0E]">
 
     {% include "./components/nav.html" %}
 
     <main class="flex-1 flex flex-col overflow-hidden">
-        <header class="h-20 bg-gray-50 flex items-center justify-between px-8">
-            <div class="relative w-96">
-                <input type="text" placeholder="Search records, obits..." class="w-full bg-gray-200 text-sm rounded-lg pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#5a2a3b] focus:bg-white transition-colors">
-                <svg class="w-4 h-4 text-gray-500 absolute left-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </div>
-            <div class="flex items-center space-x-4">
-                <button class="relative p-2 text-gray-500 hover:text-gray-700">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                    <span class="absolute top-1 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
-                <button class="p-2 text-gray-500 hover:text-gray-700">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                </button>
-                <div class="flex items-center space-x-2 pl-4 border-l border-gray-300">
-                    <div class="w-8 h-8 rounded-full bg-gray-800 text-white flex justify-center items-center text-sm">A</div>
-                    <span class="text-sm font-medium">Admin</span>
+
+        <!-- HEADER -->
+        <header class="h-14 bg-[#F7F4EE] border-b border-[#D4B96A]/30 flex items-center justify-between px-6 shrink-0">
+            <div class="text-[15px] font-medium text-[#2C1F0E]">Panel general</div>
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 bg-[#EDE8DD] rounded-full px-3.5 py-1.5 text-xs text-[#9a8a70] border border-[#D4B96A]/30">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    Buscar titular o contrato…
+                </div>
+                <div class="relative cursor-pointer">
+                    <svg class="w-5 h-5 text-[#9a8a70]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    <div class="absolute top-0 right-0 w-2 h-2 bg-[#D4B96A] rounded-full"></div>
+                </div>
+                <div class="flex items-center gap-2 pl-3 border-l border-[#D4B96A]/30">
+                    <div class="w-7 h-7 rounded-full bg-[#D4B96A]/10 border border-[#D4B96A]/25 flex items-center justify-center text-xs font-medium text-[#D4B96A]">A</div>
+                    <span class="text-xs text-[#c0a870] font-medium">Admin</span>
                 </div>
             </div>
         </header>
 
-        <div class="flex-1 overflow-auto p-8">
-            <h2 class="text-3xl font-bold text-gray-900">Panel de Gestión</h2>
-            <p class="text-gray-500 mt-1 mb-8">Resumen ejecutivo y operaciones diarias.</p>
+        <!-- MAIN CONTENT AREA -->
+        <div class="flex-1 overflow-y-auto padding p-6">
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <div class="flex items-center text-gray-500 mb-4">
-                        <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center text-[#5a2a3b] mr-3">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        </div>
-                        <span class="text-sm font-medium">Numero de Titulares</span>
-                    </div>
-                    <div class="text-4xl font-bold text-[#5a2a3b]">{{ titulares_count }}</div>
-                    <div class="text-xs text-gray-400 mt-2">+2 desde ayer</div>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <div class="flex items-center text-gray-500 mb-4">
-                        <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center text-[#5a2a3b] mr-3">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
-                        </div>
-                        <span class="text-sm font-medium">Obituarios Recientes</span>
-                    </div>
-                    <div class="text-4xl font-bold text-gray-900">08</div>
-                    <div class="text-xs text-gray-400 mt-2">Esta semana</div>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <div class="flex items-center text-gray-500 mb-4">
-                        <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center text-[#5a2a3b] mr-3">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <span class="text-sm font-medium">Citas Pendientes</span>
-                    </div>
-                    <div class="text-4xl font-bold text-gray-900">05</div>
-                    <div class="text-xs text-gray-400 mt-2">Para hoy</div>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <div class="flex items-center text-gray-500 mb-4">
-                        <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center text-[#5a2a3b] mr-3">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <span class="text-sm font-medium">Ingreso Mensual</span>
-                    </div>
-                    <div class="text-4xl font-bold text-gray-900">€42k</div>
-                    <div class="text-xs text-gray-400 mt-2">Proyectado: €50k</div>
-                </div>
+            <!-- Welcome Section -->
+            <div class="mb-5">
+                <h2 class="text-2xl font-medium text-[#2C1F0E]">Bienvenido de nuevo</h2>
+                <p class="text-[13px] text-[#9a8a70] mt-0.5">Resumen operativo de La Rosa — Servicios Funerarios</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                
-                <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-lg font-bold text-gray-900">Últimos Servicios</h3>
-                        <a href="#" class="text-sm text-gray-500 hover:text-[#5a2a3b]">Ver todos</a>
+            <!-- METRIC CARDS GRID -->
+            <div class="grid grid-cols-4 gap-3 mb-5">
+
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl border border-[#D4B96A]/15 p-4">
+                    <div class="w-8.5 h-8.5 rounded-md flex items-center justify-center mb-3 bg-[#D4B96A]/10 text-[#8a6a10]">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left">
-                            <thead class="text-gray-500 border-b border-gray-100">
-                                <tr>
-                                    <th class="pb-3 font-medium">Cliente / Familiar</th>
-                                    <th class="pb-3 font-medium">Tipo de Servicio</th>
-                                    <th class="pb-3 font-medium">Estado</th>
-                                    <th class="pb-3 font-medium">Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-50">
-                                <tr>
-                                    <td class="py-4">
-                                        <div class="font-medium text-gray-900">Elena Rodriguez</div>
-                                        <div class="text-xs text-gray-400">Ref: #SRV-1029</div>
-                                    </td>
-                                    <td class="py-4 text-gray-600">Cremación Premium</td>
-                                    <td class="py-4"><span class="px-3 py-1 bg-red-50 text-red-600 rounded-full text-xs font-medium">En Proceso</span></td>
-                                    <td class="py-4 text-gray-400 hover:text-[#5a2a3b] cursor-pointer"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg></td>
-                                </tr>
-                                <tr>
-                                    <td class="py-4">
-                                        <div class="font-medium text-gray-900">Manuel G. Santos</div>
-                                        <div class="text-xs text-gray-400">Ref: #SRV-1030</div>
-                                    </td>
-                                    <td class="py-4 text-gray-600">Inhumación Tradicional</td>
-                                    <td class="py-4"><span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium">Planificación</span></td>
-                                    <td class="py-4 text-gray-400 hover:text-[#5a2a3b] cursor-pointer"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg></td>
-                                </tr>
-                                <tr>
-                                    <td class="py-4">
-                                        <div class="font-medium text-gray-900">Sra. Clara Ortega</div>
-                                        <div class="text-xs text-gray-400">Ref: #SRV-1031</div>
-                                    </td>
-                                    <td class="py-4 text-gray-600">Traslado Internacional</td>
-                                    <td class="py-4"><span class="px-3 py-1 bg-orange-50 text-orange-600 rounded-full text-xs font-medium">Urgente</span></td>
-                                    <td class="py-4 text-gray-400 hover:text-[#5a2a3b] cursor-pointer"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="text-2xl font-medium text-[#2C1F0E] leading-none mb-1">{{ titulares_count }}</div>
+                    <div class="text-[11px] text-[#9a8a70]">Titulares activos</div>
+                    <div class="text-[10px] text-[#1a6a3a] mt-2 flex items-center gap-0.5">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                        +2 desde ayer
                     </div>
                 </div>
 
-                <div class="space-y-6">
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                        <h3 class="text-xs font-bold text-gray-500 tracking-wider mb-4 uppercase">Acciones Rápidas</h3>
-                        <div class="space-y-3">
-                            <button class="w-full flex items-center p-3 border border-gray-200 rounded-xl hover:border-[#5a2a3b] hover:text-[#5a2a3b] transition-colors text-gray-700 text-sm">
-                                <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                Publicar Obituario
-                            </button>
-                            <button class="w-full flex items-center p-3 border border-gray-200 rounded-xl hover:border-[#5a2a3b] hover:text-[#5a2a3b] transition-colors text-gray-700 text-sm">
-                                <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                Nuevo Contrato
-                            </button>
-                            <button class="w-full flex items-center p-3 border border-gray-200 rounded-xl hover:border-[#5a2a3b] hover:text-[#5a2a3b] transition-colors text-gray-700 text-sm">
-                                <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                Agendar Capilla
-                            </button>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-xl border border-[#D4B96A]/15 p-4">
+                    <div class="w-8.5 h-8.5 rounded-md flex items-center justify-center mb-3 bg-[#3a1a0a]/10 text-[#6a2a10]">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                    </div>
+                    <div class="text-2xl font-medium text-[#2C1F0E] leading-none mb-1">08</div>
+                    <div class="text-[11px] text-[#9a8a70]">Obituarios recientes</div>
+                    <div class="text-[10px] text-[#9a8a70] mt-2">Esta semana</div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-xl border border-[#D4B96A]/15 p-4">
+                    <div class="w-8.5 h-8.5 rounded-md flex items-center justify-center mb-3 bg-[#0a3a1a]/10 text-[#1a6a3a]">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <div class="text-2xl font-medium text-[#2C1F0E] leading-none mb-1">05</div>
+                    <div class="text-[11px] text-[#9a8a70]">Citas pendientes</div>
+                    <div class="text-[10px] text-[#9a8a70] mt-2">Para hoy</div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-xl border border-[#D4B96A]/15 p-4">
+                    <div class="w-8.5 h-8.5 rounded-md flex items-center justify-center mb-3 bg-[#0a1a3a]/10 text-[#1a3a6a]">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div class="text-2xl font-medium text-[#2C1F0E] leading-none mb-1">$42k</div>
+                    <div class="text-[11px] text-[#9a8a70]">Ingreso mensual</div>
+                    <div class="text-[10px] text-[#1a6a3a] mt-2 flex items-center gap-0.5">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                        Proyectado: $50k
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TWO COLUMN PANELS -->
+            <div class="grid grid-cols-[2fr_1fr] gap-4 mb-4">
+
+                <!-- Left Panel: Latest Services -->
+                <div class="bg-white rounded-xl border border-[#D4B96A]/15 p-4">
+                    <div class="flex items-center justify-between mb-3.5">
+                        <div class="text-[13px] font-medium text-[#2C1F0E]">Últimos servicios</div>
+                        <a href="#" class="text-[11px] text-[#D4B96A] no-underline">Ver todos →</a>
+                    </div>
+                    <table class="w-full text-[11px] border-collapse">
+                        <thead>
+                            <tr class="border-b border-[#D4B96A]/10">
+                                <th class="text-[#9a8a70] font-medium text-left pb-2 uppercase text-[9px] tracking-[0.08em]">Cliente / Familiar</th>
+                                <th class="text-[#9a8a70] font-medium text-left pb-2 uppercase text-[9px] tracking-[0.08em]">Tipo de servicio</th>
+                                <th class="text-[#9a8a70] font-medium text-left pb-2 uppercase text-[9px] tracking-[0.08em]">Estado</th>
+                                <th class="pb-2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-[#f0ece4] last:border-b-0">
+                                <td class="py-2 align-middle">
+                                    <div class="font-medium text-xs">Elena Rodríguez</div>
+                                    <div class="text-[10px] text-[#9a8a70]">#SRV-1029</div>
+                                </td>
+                                <td class="py-2 align-middle text-[#5a4a35]">Cremación Premium</td>
+                                <td class="py-2 align-middle">
+                                    <span class="inline-flex px-2 py-0.5 rounded-[10px] text-[10px] font-medium bg-[#3a1a0a]/10 text-[#6a2a10]">En proceso</span>
+                                </td>
+                                <td class="py-2 align-middle text-right text-[#9a8a70] cursor-pointer">···</td>
+                            </tr>
+                            <tr class="border-b border-[#f0ece4] last:border-b-0">
+                                <td class="py-2 align-middle">
+                                    <div class="font-medium text-xs">Manuel G. Santos</div>
+                                    <div class="text-[10px] text-[#9a8a70]">#SRV-1030</div>
+                                </td>
+                                <td class="py-2 align-middle text-[#5a4a35]">Inhumación Tradicional</td>
+                                <td class="py-2 align-middle">
+                                    <span class="inline-flex px-2 py-0.5 rounded-[10px] text-[10px] font-medium bg-[#D4B96A]/10 text-[#7a5a10]">Planificación</span>
+                                </td>
+                                <td class="py-2 align-middle text-right text-[#9a8a70] cursor-pointer">···</td>
+                            </tr>
+                            <tr class="border-b border-[#f0ece4] last:border-b-0">
+                                <td class="py-2 align-middle">
+                                    <div class="font-medium text-xs">Sra. Clara Ortega</div>
+                                    <div class="text-[10px] text-[#9a8a70]">#SRV-1031</div>
+                                </td>
+                                <td class="py-2 align-middle text-[#5a4a35]">Traslado Internacional</td>
+                                <td class="py-2 align-middle">
+                                    <span class="inline-flex px-2 py-0.5 rounded-[10px] text-[10px] font-medium bg-[#fef3c7] text-[#92400e]">Urgente</span>
+                                </td>
+                                <td class="py-2 align-middle text-right text-[#9a8a70] cursor-pointer">···</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Right Side Stacked Panels -->
+                <div class="flex flex-col gap-4">
+
+                    <!-- Sub Panel: Chart -->
+                    <div class="bg-white rounded-xl border border-[#D4B96A]/15 p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="text-[13px] font-medium text-[#2C1F0E]">Afiliaciones por mes</div>
+                        </div>
+                        <div class="flex items-end gap-1.5 h-17.5">
+                            <div class="flex-1 flex flex-col items-center gap-1">
+                                <div class="w-full bg-[#D4B96A]/25 h-[35%] rounded-t-[3px] min-h-1"></div>
+                                <span class="text-[9px] text-[#9a8a70]">Ene</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-1">
+                                <div class="w-full bg-[#D4B96A]/25 h-[50%] rounded-t-[3px] min-h-1"></div>
+                                <span class="text-[9px] text-[#9a8a70]">Feb</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-1">
+                                <div class="w-full bg-[#D4B96A]/25 h-[42%] rounded-t-[3px] min-h-1"></div>
+                                <span class="text-[9px] text-[#9a8a70]">Mar</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-1">
+                                <div class="w-full bg-[#D4B96A]/25 h-[68%] rounded-t-[3px] min-h-1"></div>
+                                <span class="text-[9px] text-[#9a8a70]">Abr</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-1">
+                                <div class="w-full bg-[#D4B96A]/25 h-[55%] rounded-t-[3px] min-h-1"></div>
+                                <span class="text-[9px] text-[#9a8a70]">May</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-1">
+                                <div class="w-full bg-[#D4B96A] h-[90%] rounded-t-[3px] min-h-1"></div>
+                                <span class="text-[9px] text-[#9a8a70]">Jun</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="bg-[#3e1724] text-white rounded-2xl p-6 relative overflow-hidden shadow-md">
-                        <svg class="absolute -bottom-10 -right-10 w-40 h-40 text-white opacity-10" viewBox="0 0 100 100" fill="currentColor">
-                            <path d="M50 0C50 27.6 27.6 50 0 50C27.6 50 50 72.4 50 100C50 72.4 72.4 50 100 50C72.4 50 50 27.6 50 0Z"></path>
-                        </svg>
+                    <!-- Sub Panel: Quick Actions -->
+                    <div class="bg-white rounded-xl border border-[#D4B96A]/15 p-4">
+                        <div class="text-[13px] font-medium text-[#2C1F0E] mb-3">Acciones rápidas</div>
                         
-                        <h3 class="text-xl font-serif font-bold mb-2 relative z-10">Próxima Ceremonia</h3>
-                        <div class="flex items-center text-red-200 text-xs mb-4 relative z-10">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Hoy, 16:30 PM
+                        <button class="flex items-center gap-2 p-2.5 bg-[#F7F4EE] rounded-md text-xs text-[#3a2e22] cursor-pointer border border-[#D4B96A]/20 mb-2 transition-all duration-150 w-full text-left last:mb-0 hover:bg-[#D4B96A]/10 hover:border-[#D4B96A]/40" onclick="">
+                            <svg class="w-4 h-4 text-[#D4B96A] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            Publicar obituario
+                        </button>
+                        
+                        <button class="flex items-center gap-2 p-2.5 bg-[#F7F4EE] rounded-md text-xs text-[#3a2e22] cursor-pointer border border-[#D4B96A]/20 mb-2 transition-all duration-150 w-full text-left last:mb-0 hover:bg-[#D4B96A]/10 hover:border-[#D4B96A]/40" onclick="">
+                            <svg class="w-4 h-4 text-[#D4B96A] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            Nuevo contrato
+                        </button>
+                        
+                        <button class="flex items-center gap-2 p-2.5 bg-[#F7F4EE] rounded-md text-xs text-[#3a2e22] cursor-pointer border border-[#D4B96A]/20 mb-2 transition-all duration-150 w-full text-left last:mb-0 hover:bg-[#D4B96A]/10 hover:border-[#D4B96A]/40" onclick="">
+                            <svg class="w-4 h-4 text-[#D4B96A] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Agendar capilla
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FULL WIDTH ROW: RECENT ACTIVITY -->
+            <div class="grid grid-cols-1 gap-4">
+                <div class="bg-white rounded-xl border border-[#D4B96A]/15 p-4">
+                    <div class="flex items-center justify-between mb-3.5">
+                        <div class="text-[13px] font-medium text-[#2C1F0E]">Actividad reciente</div>
+                        <a href="#" class="text-[11px] text-[#D4B96A] no-underline">Ver historial →</a>
+                    </div>
+                    <div class="grid grid-cols-3 gap-x-6 gap-y-0">
+                        
+                        <!-- Activity 1 -->
+                        <div class="flex items-start gap-2.5 py-2 border-b border-[#f0ece4]">
+                            <div class="w-1.5 h-1.5 rounded-full bg-[#D4B96A] mt-1.5 shrink-0"></div>
+                            <div>
+                                <div class="text-[11px] text-[#3a2e22] line-height-normal">Nuevo beneficiario añadido al contrato <strong class="font-mono text-[11px] text-[#D4B96A] font-medium">#0248</strong></div>
+                                <div class="text-[10px] text-[#9a8a70]">Hace 10 min</div>
+                            </div>
                         </div>
-                        <p class="italic text-white font-serif mb-6 relative z-10">"En memoria de Carlos Ruiz Z."</p>
-                        <div class="bg-[#5a2a3b] border border-[#6b3548] rounded-lg p-3 text-xs text-center relative z-10">
-                            Capilla A - Jardines de la Paz
+                        
+                        <!-- Activity 2 -->
+                        <div class="flex items-start gap-2.5 py-2 border-b border-[#f0ece4]">
+                            <div class="w-1.5 h-1.5 rounded-full bg-[#D4B96A] mt-1.5 shrink-0"></div>
+                            <div>
+                                <div class="text-[11px] text-[#3a2e22] line-height-normal">Contrato <strong class="font-mono text-[11px] text-[#D4B96A] font-medium">#0247</strong> actualizado a pendiente</div>
+                                <div class="text-[10px] text-[#9a8a70]">Hace 1 hora</div>
+                            </div>
                         </div>
+                        
+                        <!-- Activity 3 -->
+                        <div class="flex items-start gap-2.5 py-2 border-b border-[#f0ece4]">
+                            <div class="w-1.5 h-1.5 rounded-full bg-[#D4B96A] mt-1.5 shrink-0"></div>
+                            <div>
+                                <div class="text-[11px] text-[#3a2e22] line-height-normal">Titular <strong>Luis Herrera</strong> registrado en sistema</div>
+                                <div class="text-[10px] text-[#9a8a70]">Hace 3 horas</div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
     </main>
 
 </body>
 </html>
+
+<!--
+  Guía rápida de cómo reescribir tus clases del NAV-ITEM por si las necesitas en "./components/nav.html":
+
+  Clase Base (.nav-item):
+  "flex items-center gap-2.5 px-5 py-2.5 text-[13px] text-[#9a8a70] no-underline border-l-2 border-transparent transition-all duration-150 hover:text-[#D4B96A] hover:bg-white/5"
+
+  Clase Activa (.nav-active):
+  "text-[#D4B96A] bg-[#D4B96A]/10 border-l-2 border-[#D4B96A]"
+-->

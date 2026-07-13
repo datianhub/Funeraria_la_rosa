@@ -1,120 +1,143 @@
 <dialog id="modal_titulares" class="modal">
-    <div class="modal-box w-11/12 max-w-6xl h-5/6  p-6 rounded-2xl shadow-xl bg-white">
-    
-        <div class="flex justify-between items-start border-b border-gray-100 pb-4 mb-4">
+    <div class="modal-box w-11/12 max-w-6xl h-5/6 p-0 rounded-2xl shadow-xl overflow-hidden bg-[#F7F4EE] border border-[#D4B96A]/20 pb-10">
+
+        <div class=" px-6 py-5 flex justify-between items-start border-b border-[#3a2e224e]">
             <div>
-                <h3 class="font-bold text-xl text-gray-900 uppercase">Registro de Titular</h3>
-                <p id="modal_titular_nombre" class="text-sm text-[#5a2a3b] font-medium mt-0.5"></p>
+                <div class="text-[9px] text-[#5a4a35] tracking-[0.14em] uppercase mb-1">La Rosa — Servicios Funerarios</div>
+                <h3 class="text-1xl font-medium text-[#5a4a35] m-0">Registro de Titular</h3>
+                <p class="text-xs text-[#7a6a52] mt-0.5">Completa todos los campos requeridos para crear el contrato</p>
             </div>
             <form method="dialog">
-                <button class="btn btn-sm btn-circle btn-ghost text-gray-400 hover:text-gray-600">✕</button>
+                <button class="bg-[#D4B96A]/10 border border-[#D4B96A]/40 text-[#D4B96A] rounded-full w-7 h-7 flex items-center justify-center text-sm cursor-pointer leading-none transition-colors hover:bg-[#D4B96A]/20">✕</button>
             </form>
         </div>
 
-        <div class="h-[calc(100%-5rem)] w-full block">
-            <form action="{% url 'titular_registro' %}" method="POST" class="formulario-titular grid grid-cols-2 max-h-full gap-3 h-full w-full content-start overflow-y-auto p-2">
-                {% csrf_token %} 
+        <div class="h-[calc(100%-76px)] overflow-y-auto p-6">
+            <form action="{% url 'titular_registro' %}" method="POST" class="formulario-titular">
+                {% csrf_token %}
 
-                <div class="form-group">
-                    <label class="" for="{{ form.cedula.id_for_label }}">Cédula:</label>
-                    {{ form.cedula }} 
-                    {% if form.cedula.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form.cedula.errors }}</div>
-                    {% endif %}
+                <div class="mb-5">
+                    <div class="flex items-center gap-2 mb-3.5">
+                        <div class="w-0.5 h-3.5 bg-[#D4B96A] rounded-xs"></div>
+                        <span class="text-[10px] text-[#7a6a52] tracking-[0.12em] uppercase font-medium">Identificación</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[11px] font-medium text-[#5a4a35] tracking-wide" for="{{ form.cedula.id_for_label }}">Cédula <span class="text-[#D4B96A]">*</span></label>
+                            {{ form.cedula }}
+                            {% if form.cedula.errors %}
+                                <div class="text-[10px] text-white bg-[#8a2a10] rounded py-0.5 px-2 mt-0.5">{{ form.cedula.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[11px] font-medium text-[#5a4a35] tracking-wide" for="{{ form.numero_contrato.id_for_label }}">Número de contrato <span class="text-[#D4B96A]">*</span></label>
+                            {{ form.numero_contrato }}
+                            {% if form.numero_contrato.errors %}
+                                <div class="text-[10px] text-white bg-[#8a2a10] rounded py-0.5 px-2 mt-0.5">{{ form.numero_contrato.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="{{ form.numero_contrato.id_for_label }}">Número de Contrato:</label>
-                    {{ form.numero_contrato }}
-                    {% if form.numero_contrato.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form.numero_contrato.errors }}</div>
-                    {% endif %}
+                <div class="mb-5">
+                    <div class="flex items-center gap-2 mb-3.5">
+                        <div class="w-0.5 h-3.5 bg-[#D4B96A] rounded-xs"></div>
+                        <span class="text-[10px] text-[#7a6a52] tracking-[0.12em] uppercase font-medium">Datos personales</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[11px] font-medium text-[#5a4a35] tracking-wide" for="{{ form.nombre.id_for_label }}">Nombre <span class="text-[#D4B96A]">*</span></label>
+                            {{ form.nombre }}
+                            {% if form.nombre.errors %}
+                                <div class="text-[10px] text-white bg-[#8a2a10] rounded py-0.5 px-2 mt-0.5">{{ form.nombre.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[11px] font-medium text-[#5a4a35] tracking-wide" for="{{ form.apellido.id_for_label }}">Apellido <span class="text-[#D4B96A]">*</span></label>
+                            {{ form.apellido }}
+                            {% if form.apellido.errors %}
+                                <div class="text-[10px] text-white bg-[#8a2a10] rounded py-0.5 px-2 mt-0.5">{{ form.apellido.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[11px] font-medium text-[#5a4a35] tracking-wide" for="{{ form.sexo.id_for_label }}">Sexo <span class="text-[#D4B96A]">*</span></label>
+                            {{ form.sexo }}
+                            {% if form.sexo.errors %}
+                                <div class="text-[10px] text-white bg-[#8a2a10] rounded py-0.5 px-2 mt-0.5">{{ form.sexo.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[11px] font-medium text-[#5a4a35] tracking-wide" for="{{ form.edad.id_for_label }}">Edad <span class="text-[#9a8a70] font-normal">(opcional)</span></label>
+                            {{ form.edad }}
+                            {% if form.edad.errors %}
+                                <div class="text-[10px] text-white bg-[#8a2a10] rounded py-0.5 px-2 mt-0.5">{{ form.edad.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[11px] font-medium text-[#5a4a35] tracking-wide" for="{{ form.estado_civil.id_for_label }}">Estado civil <span class="text-[#9a8a70] font-normal">(opcional)</span></label>
+                            {{ form.estado_civil }}
+                            {% if form.estado_civil.errors %}
+                                <div class="text-[10px] text-white bg-[#8a2a10] rounded py-0.5 px-2 mt-0.5">{{ form.estado_civil.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[11px] font-medium text-[#5a4a35] tracking-wide" for="{{ form.ocupacion.id_for_label }}">Ocupación <span class="text-[#9a8a70] font-normal">(opcional)</span></label>
+                            {{ form.ocupacion }}
+                            {% if form.ocupacion.errors %}
+                                <div class="text-[10px] text-white bg-[#8a2a10] rounded py-0.5 px-2 mt-0.5">{{ form.ocupacion.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
-                    {{ form.nombre }}
-                    {% if form.nombre.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form.nombre.errors }}</div>
-                    {% endif %}
+                <div class="mb-6">
+                    <div class="flex items-center gap-2 mb-3.5">
+                        <div class="w-0.5 h-3.5 bg-[#D4B96A] rounded-xs"></div>
+                        <span class="text-[10px] text-[#7a6a52] tracking-[0.12em] uppercase font-medium">Contacto y contrato</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+
+                        <div class="flex flex-col gap-1.5 col-span-2">
+                            <label class="text-[11px] font-medium text-[#5a4a35] tracking-wide" for="{{ form.direccion.id_for_label }}">Dirección <span class="text-[#D4B96A]">*</span></label>
+                            {{ form.direccion }}
+                            {% if form.direccion.errors %}
+                                <div class="text-[10px] text-white bg-[#8a2a10] rounded py-0.5 px-2 mt-0.5">{{ form.direccion.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[11px] font-medium text-[#5a4a35] tracking-wide" for="{{ form.telefono.id_for_label }}">Teléfono <span class="text-[#D4B96A]">*</span></label>
+                            {{ form.telefono }}
+                            {% if form.telefono.errors %}
+                                <div class="text-[10px] text-white bg-[#8a2a10] rounded py-0.5 px-2 mt-0.5">{{ form.telefono.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="{{ form.apellido.id_for_label }}">Apellido:</label>
-                    {{ form.apellido }}
-                    {% if form.apellido.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form.apellido.errors }}</div>
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.sexo.id_for_label }}">Sexo:</label>
-                    {{ form.sexo }}
-                    {% if form.sexo.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form.sexo.errors }}</div>
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.edad.id_for_label }}">Edad (Opcional):</label>
-                    {{ form.edad }}
-                    {% if form.edad.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form.edad.errors }}</div>
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.estado_civil.id_for_label }}">Estado Civil (Opcional):</label>
-                    {{ form.estado_civil }}
-                    {% if form.estado_civil.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form.estado_civil.errors }}</div>
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.ocupacion.id_for_label }}">Ocupación (Opcional):</label>
-                    {{ form.ocupacion }}
-                    {% if form.ocupacion.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form.ocupacion.errors }}</div>
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.direccion.id_for_label }}">Dirección:</label>
-                    {{ form.direccion }}
-                    {% if form.direccion.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form.direccion.errors }}</div>
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.telefono.id_for_label }}">Teléfono:</label>
-                    {{ form.telefono }}
-                    {% if form.telefono.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form.telefono.errors }}</div>
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.fecha_ingreso.id_for_label }}">Fecha de Ingreso:</label>
-                    {{ form.fecha_ingreso }}
-                    {% if form.fecha_ingreso.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form.fecha_ingreso.errors }}</div>
-                    {% endif %}
-                </div>
-
-                <button type="submit" class="w-full mt-4 bg-[#5a2a3b] hover:bg-[#461e2c] text-white font-medium py-3 px-4 rounded-lg flex justify-center items-center transition-colors">
-                    Guardar Titular
+                <button type="submit"
+                    class="w-full bg-[#D4B96A] text-[#1C1410] text-[13px] font-medium py-3 px-4 rounded-md border-none cursor-pointer transition-colors duration-150 flex items-center justify-center gap-2 hover:bg-[#c4a95a]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Guardar titular
                 </button>
+
             </form>
         </div>
-        
-        <div id="modal_mensaje_estado" class="text-center py-6 text-gray-400 hidden">
-            Cargando beneficiarios...
-        </div>
+
     </div>
-  
+
     <form method="dialog" class="modal-backdrop">
-        <button>close</button>
+        <button class="cursor-default">close</button>
     </form>
 </dialog>

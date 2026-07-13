@@ -1,130 +1,150 @@
 <dialog id="modal_registro_beneficiario" class="modal">
-    <div class="modal-box w-11/12 max-w-5xl h-5/6 p-6 rounded-2xl shadow-xl bg-amber-50 overflow-hidden">
-    
-        <div class="flex justify-between items-start border-b border-gray-100 pb-4 mb-4 h-16">
+    <div class="modal-box w-11/12 max-w-5xl h-max p-0 rounded-2xl shadow-xl overflow-hidden bg-[#F7F4EE] border border-[#D4B96A]/30">
+
+        {# Encabezado del Modal #}
+        <div class="flex justify-between items-start px-6 py-5 border-b border-[#3a2e22]">
             <div>
-                <h3 class="font-bold text-xl text-gray-900">Registrar Nuevo Beneficiario</h3>
-                <p class="text-sm text-[#5a2a3b] font-medium mt-0.5">Asociado al titular actual</p>
+                <p class="uppercase tracking-widest mb-1 text-[9px] text-[#5a4a35]">La Rosa — Servicios Funerarios</p>
+                <h3 class="font-medium text-lg text-[#3a2e22]">Registrar Beneficiario</h3>
+                <p class="text-xs mt-0.5 text-[#7a6a52]">Completa los campos para asociar el beneficiario al titular</p>
             </div>
             <form method="dialog">
-                <button class="btn btn-sm btn-circle btn-ghost text-gray-400 hover:text-gray-600">✕</button>
+                <button class="flex items-center justify-center w-7 h-7 rounded-full text-sm cursor-pointer bg-[#D4B96A]/10 border border-[#D4B96A]/40 text-[#D4B96A] transition-colors hover:bg-[#D4B96A]/20">✕</button>
             </form>
         </div>
 
-        <div class="h-[calc(100%-5rem)] w-full block">
-            
-            <form id="form-registro-beneficiario" action="{% url 'beneficiario_registro' %}" method="POST" class="grid grid-cols-3 gap-4 h-full w-full content-start overflow-y-auto p-2">
+        {# Cuerpo del Formulario #}
+        <div class="p-6">
+            <form id="form-registro-beneficiario" action="{% url 'beneficiario_registro' %}" method="POST">
                 {% csrf_token %}
-                
                 {{ form_beneficiario.titular }}
-                
 
-                <div class="form-group col-span-2">
-                    <label class="block mb-1.5 text-sm font-medium text-gray-700" for="{{ form_beneficiario.nombre_completo.id_for_label }}">Nombre Completo:</label>
-                    {{ form_beneficiario.nombre_completo }}
-                    {% if form_beneficiario.nombre_completo.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.nombre_completo.errors }}</div>
-                    {% endif %}
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-0.5 h-3.5 rounded-sm bg-[#D4B96A]"></div>
+                    <span class="uppercase tracking-widest font-medium text-[10px] text-[#7a6a52]">Datos del beneficiario</span>
                 </div>
 
-                <div class="form-group col-span-1">
-                    <label class="block mb-1.5 text-sm font-medium text-gray-700" for="{{ form_beneficiario.cedula.id_for_label }}">Cédula:</label>
-                    {{ form_beneficiario.cedula }}
-                    {% if form_beneficiario.cedula.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.cedula.errors }}</div>
-                    {% endif %}
-                </div>
+                <div class="grid grid-cols-3 gap-3 mb-5">
 
-                <div class="form-group col-span-1">
-                    <label class="block mb-1.5 text-sm font-medium text-gray-700" for="{{ form_beneficiario.parentesco.id_for_label }}">Parentesco:</label>
-                    {{ form_beneficiario.parentesco }}
-                    {% if form_beneficiario.parentesco.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.parentesco.errors }}</div>
-                    {% endif %}
-                </div>
+                    {# Campo: Nombre Completo #}
+                    <div class="col-span-2 flex flex-col gap-1">
+                        <label class="font-medium text-[11px] text-[#5a4a35]" for="{{ form_beneficiario.nombre_completo.id_for_label }}">
+                            Nombre completo <span class="text-[#D4B96A]">*</span>
+                        </label>
+                        {{ form_beneficiario.nombre_completo }}
+                        {% if form_beneficiario.nombre_completo.errors %}
+                            <div class="text-white text-xs rounded px-2 py-1 mt-0.5 bg-[#8a2a10] shadow-sm">{{ form_beneficiario.nombre_completo.errors }}</div>
+                        {% endif %}
+                    </div>
 
-                <div class="form-group col-span-1">
-                    <label class="block mb-1.5 text-sm font-medium text-gray-700" for="{{ form_beneficiario.edad_afiliacion.id_for_label }}">Edad de Afiliación:</label>
-                    {{ form_beneficiario.edad_afiliacion }}
-                    {% if form_beneficiario.edad_afiliacion.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.edad_afiliacion.errors }}</div>
-                    {% endif %}
-                </div>
+                    {# Campo: Cédula #}
+                    <div class="col-span-1 flex flex-col gap-1">
+                        <label class="font-medium text-[11px] text-[#5a4a35]" for="{{ form_beneficiario.cedula.id_for_label }}">
+                            Cédula <span class="text-[#D4B96A]">*</span>
+                        </label>
+                        {{ form_beneficiario.cedula }}
+                        {% if form_beneficiario.cedula.errors %}
+                            <div class="text-white text-xs rounded px-2 py-1 mt-0.5 bg-[#8a2a10] shadow-sm">{{ form_beneficiario.cedula.errors }}</div>
+                        {% endif %}
+                    </div>
 
-                <div class="form-group col-span-1">
-                    <label class="block mb-1.5 text-sm font-medium text-gray-700" for="{{ form_beneficiario.edad_actual.id_for_label }}">Edad Actual: </label>
-                    {{ form_beneficiario.edad_actual }}
-                    {% if form_beneficiario.edad_actual.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.edad_actual.errors }}</div>
-                    {% endif %}
-                </div>
+                    {# Campo: Parentesco #}
+                    <div class="col-span-2 flex flex-col gap-1">
+                        <label class="font-medium text-[11px] text-[#5a4a35]" for="{{ form_beneficiario.parentesco.id_for_label }}">
+                            Parentesco <span class="text-[#D4B96A]">*</span>
+                        </label>
+                        {{ form_beneficiario.parentesco }}
+                        {% if form_beneficiario.parentesco.errors %}
+                            <div class="text-white text-xs rounded px-2 py-1 mt-0.5 bg-[#8a2a10] shadow-sm">{{ form_beneficiario.parentesco.errors }}</div>
+                        {% endif %}
+                    </div>
 
-                <div class="form-group col-span-1">
-                    <label for="{{ form_beneficiario.mascota.id_for_label }}" class="ml-2 text-sm font-medium text-gray-900">¿Es una mascota?</label>
-                        {{ form_beneficiario.mascota }}
-                    {% if form_beneficiario.mascota.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.mascota.errors }}</div>
-                    {% endif %}
-                </div>
+                    {# Campo: Edad de Afiliación #}
+                    <div class="col-span-1 flex flex-col gap-1">
+                        <label class="font-medium text-[11px] text-[#5a4a35]" for="{{ form_beneficiario.edad_afiliacion.id_for_label }}">
+                            Edad de afiliación <span class="text-[#D4B96A]">*</span>
+                        </label>
+                        {{ form_beneficiario.edad_afiliacion }}
+                        {% if form_beneficiario.edad_afiliacion.errors %}
+                            <div class="text-white text-xs rounded px-2 py-1 mt-0.5 bg-[#8a2a10] shadow-sm">{{ form_beneficiario.edad_afiliacion.errors }}</div>
+                        {% endif %}
+                    </div>
 
-                <div class="form-group col-span-1 ">
-                    <label for="{{ form_beneficiario.tipo_mascota.id_for_label }}" class="ml-2 text-sm font-medium text-gray-900">Tipo de mascota</label>
-                    {{ form_beneficiario.tipo_mascota}}
-                    {% if form_beneficiario.tipo_mascota.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.tipo_mascota.errors}} </div>
-                    {% endif %}
-                </div>
-
-                <div class="form-group col-span-1">
-                    <label for="{{ form_beneficiario.notas.id_for_label }}" class="ml-2 text-sm font-medium text-gray-900">Notas</label>
+                    {# Campo: Notas #}
+                    <div class="col-span-3 flex flex-col gap-1">
+                        <label class="font-medium text-[11px] text-[#5a4a35]" for="{{ form_beneficiario.notas.id_for_label }}">
+                            Notas <span class="font-normal text-[#9a8a70]">(opcional)</span>
+                        </label>
                         {{ form_beneficiario.notas }}
-                    {% if form_beneficiario.tipo_mascota.errors %}
-                        <div class="error-msg bg-red-500 py-1 px-1 text-white text-xs rounded mt-1">{{ form_beneficiario.notas.errors}} </div>
-                    {% endif %}
+                        {% if form_beneficiario.notas.errors %}
+                            <div class="text-white text-xs rounded px-2 py-1 mt-0.5 bg-[#8a2a10] shadow-sm">{{ form_beneficiario.notas.errors }}</div>
+                        {% endif %}
+                    </div>
+
                 </div>
 
-                <div class="col-span-3 mt-4">
-                    <button type="submit" class="w-full bg-[#5a2a3b] hover:bg-[#461e2c] text-white font-medium py-3 px-4 rounded-lg flex justify-center items-center transition-colors">
-                        Guardar Beneficiario
-                    </button>
-                </div>
+                {# Botón de Envío #}
+                <button type="submit"
+                    class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg text-sm font-medium bg-[#D4B96A] text-[#1C1410] cursor-pointer transition-colors duration-150 hover:bg-[#c4a95a]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Guardar beneficiario
+                </button>
+
             </form>
-            
         </div>
-        
+
     </div>
-  
+
+    {# Fondo oscuro de cierre #}
     <form method="dialog" class="modal-backdrop">
-        <button>close</button>
+        <button class="cursor-default">close</button>
     </form>
 </dialog>
 
-<script>
-    function ableFilePetType(){
-        const filePet = document.getElementById("id_mascota")
-        const filePetType = document.getElementById("id_tipo_mascota")
-
-        if(filePet.checked){
-            filePetType.disabled = false;
-        }else{
-            filePetType.disabled = true;
-            filePetType.value = ""
-        }
+<style>
+    #form-registro-beneficiario input[type="text"],
+    #form-registro-beneficiario input[type="number"],
+    #form-registro-beneficiario input[type="date"],
+    #form-registro-beneficiario select,
+    #form-registro-beneficiario textarea {
+        width: 100%;
+        background: #fff;
+        border: 0.5px solid #D4B96A40;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 12px;
+        color: #2C1F0E;
+        outline: none;
+        transition: border-color 0.15s, box-shadow 0.15s;
+        font-family: 'Inter', sans-serif;
     }
+    #form-registro-beneficiario input:focus,
+    #form-registro-beneficiario select:focus,
+    #form-registro-beneficiario textarea:focus {
+        border-color: #D4B96A;
+        box-shadow: 0 0 0 3px #D4B96A18;
+    }
+    #form-registro-beneficiario select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23D4B96A'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 14px;
+        padding-right: 32px;
+        cursor: pointer;
+    }
+</style>
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const filePet = document.getElementById("id_mascota");
-        if (filePet) {
-            filePet.addEventListener("change", ableFilePetType);
-            ableFilePetType(); 
-        }
-    });
-
+<script>
     document.getElementById("form-registro-beneficiario").addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const form = this;
     const formData = new FormData(form);
+
+    console.log(formData)
 
     try {
         const response = await fetch(form.action, {
@@ -138,6 +158,7 @@
             const data = await response.json();
             if (data.success) {
                 document.getElementById('modal_registro_beneficiario').close();
+                form.reset();
                 const nombreTitular = document.getElementById('modal_titular_nombre').innerText.replace('Titular: ', '');
                 abrirModalBeneficiarios(titularSeleccionadoId, nombreTitular);
             }

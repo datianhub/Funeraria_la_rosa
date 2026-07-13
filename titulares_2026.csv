@@ -1,0 +1,61 @@
+﻿numero_contrato,cedula,nombre,apellido,nombre_completo_original,sexo,direccion,telefono,fecha_ingreso,edad,estado_civil,ocupacion,plan_activo
+6,1017126370,Alexis Yesi,Guisao Holguin,ALEXIS YESI GUISAO HOLGUIN,F,"Calle 133 # 90-4 Este, Apartamento 5, 151819, El Espino, Boyacá",3010433218,2022-08-22,,,,True
+11,43689700,Diana Miosotis,Salazar Vargas,DIANA MIOSOTIS SALAZAR VARGAS,F,"Cr. 21 # 6-55, Oficina 490, 976542, Yavaraté, Vaupés",3019600133,2022-08-29,,,,True
+14,1040180764,Maria Fernanda,Vargas Quiceno,MARIA FERNANDA VARGAS QUICENO,F,"Cr. 23C # 6-37 Sur, 709310, Galeras, Sucre",3219083863,2022-09-01,,,,True
+16,1040182347,Maria Veronica,Laserna Castaño,MARIA VERONICA LASERNA CASTAÑO,F,"Cl. 40 # 6Z-7 Sur, Torre 5 apartamento 2, 527648, Cuaspud Carlosama, Nariño",3209402654,2022-09-06,,,,True
+2,1193031764,Julieth Nathalia,Arango Bedoya,JULIETH NATHALIA ARANGO BEDOYA,F,"Carrera 79 # 9-82, 082388, Piojó, Atlántico",3023511615,2022-09-09,,,,True
+4,43450591,Yaneth Arelis,Giraldo Franco,YANETH ARELIS GIRALDO FRANCO,F,"Tr. 91 Sur # 55-71, Apto. 39, 056697, San Pedro de Urabá, Antioquia",3129407816,2022-09-12,,,,True
+22,43689525,Lida Maria,Bedoya Rios,LIDA MARIA BEDOYA RIOS,F,"Calle 18 # 17-2 Sur, 688932, Vetas, Santander",3018495931,2022-09-12,,,,True
+32,43689449,Sarid Viviana,Castaño Tangarife,SARID VIVIANA CASTAÑO TANGARIFE,F,"Transversal 94F # 9N-43 Este, 411822, Rivera, Huila",3003413164,2022-09-22,,,,True
+33,21953131,Olga Ruth,Villada Ramirez,OLGA RUTH VILLADA RAMIREZ,F,"Cl. 1H # 1-4, Oficina 681, 413150, Timaná, Huila",3205255341,2022-10-01,,,,True
+34,71555194,William De,Jesus Mejia Tangarife,WILLIAM DE JESUS MEJIA TANGARIFE,M,"Cr. 163 # 7-6 Sur, Local 27, 058299, La Pintada, Antioquia",3502832764,2022-10-03,,,,True
+35,21954430,Maria Edenive,Tangarife Roman,MARIA EDENIVE TANGARIFE ROMAN,F,"Carrera 36 # 2-83 Este, 665133, Pueblo Rico, Risaralda",3213503056,2022-10-04,,,,True
+36,21954664,Maria Zoraida,Suaza Garcia,MARIA ZORAIDA SUAZA GARCIA,F,"Carrera 30 # 5-86 Sur, Apartamento 9, 152677, Berbeo, Boyacá",3111395376,2022-10-05,,,,True
+37,39184061,Alba Lucia,Montoya Hincapie,ALBA LUCIA MONTOYA HINCAPIE,F,"Carrera 9ª # 12Q-9, Bodega 33, 689805, Confines, Santander",3202423884,2022-10-09,,,,True
+38,21954892,Sonia Milena,Ruda Soto,SONIA MILENA RUDA SOTO,F,"Cr. 9ª # 4-64, Apto. 21, 199909, Mercaderes, Cauca",3506965328,2022-10-12,,,,True
+39,43552268,Alba Ruby,Ruda Soto,ALBA RUBY RUDA SOTO,F,"Cl. 5ª # 6-2, Oficina 371, 257991, Simijaca, Cundinamarca",3201012269,2022-10-13,,,,True
+41,21954516,Gloria Patricia,Bedoya Arroyave,GLORIA PATRICIA BEDOYA ARROYAVE,F,"Avenida Manizales # 4-69, 521241, Ospina, Nariño",3016697848,2022-10-22,,,,True
+44,1040182102,Milena Maria,Villa Quintero,MILENA MARIA VILLA QUINTERO,F,"Cr. 97I Este # 28-20 Este, 254005, Sesquilé, Cundinamarca",3001845146,2022-10-25,,,,True
+8,43638759,Maria Del,C Arredondo Mona,MARIA DEL C ARREDONDO MONA,F,"Cl. 61 # 36-49, Apartamento 62, 154505, Tipacoque, Boyacá",3027048281,2022-10-19,,,,True
+46,42154835,Leidy Johana,Londoño Jaramillo,LEIDY JOHANA LONDOÑO JARAMILLO,F,"Avenida David Ferney Cruz Suárez # 13-43 Sur, Oficina 16, 194216, Almaguer, Cauca",3118932528,2022-11-01,,,,True
+42,43689709,Claudia Marcela,Chaverra Echeve,CLAUDIA MARCELA CHAVERRA ECHEVE,F,"Tr. 2B # 65-7 Este, 470142, Pivijay, Magdalena",3210957015,2022-11-01,,,,True
+45,1040183909,Carlos Mario,Rondon Castañeda,CARLOS MARIO RONDON CASTAÑEDA,M,"Calle 65 # 91-54 Este, 810883, Arauca",3113039117,2022-11-10,,,,True
+47,3558584,Alvaro De,Jesus Correa Tangarife,ALVARO DE JESUS CORREA TANGARIFE,M,"Carrera 5A # 6-86 Sur, Local 78, 666629, Guática, Risaralda",3018227824,2022-11-15,,,,True
+49,21953163,Odila Del,Socorro Quintero Gomez,ODILA DEL SOCORRO QUINTERO GOMEZ,F,"Avenida calle 4ª # 33-13, 688951, Piedecuesta, Santander",3219638346,2022-11-21,,,,True
+51,21953375,Carmen Emilia,Quintero Gomez,CARMEN EMILIA QUINTERO GOMEZ,F,"Calle 71Y # 8-18 Este, 257632, Guayabetal, Cundinamarca",3127871331,2022-12-01,,,,True
+52,43906287,Monica Maria,Loaiza Lopez,MONICA MARIA LOAIZA LOPEZ,F,"Avenida calle 187 # 8X-57, 257986, Lenguazaque, Cundinamarca",3120983930,2022-12-04,,,,True
+50,39094300,Maria Emperatriz,Ariñez Diaz,MARIA EMPERATRIZ ARIÑEZ DIAZ,F,"Avenida Caldas # 4-7 Este, 253455, Villagómez, Cundinamarca",3010310518,2022-12-13,,,,True
+53,21953484,Luz Maria,Salazar Garcia,LUZ MARIA SALAZAR GARCIA,F,"Av. carrera 1ª # 7Y-89, Torre 2 apartamento 756, 153669, Tuta, Boyacá",3104738299,2022-12-15,,,,True
+54,71555722,Oscar Dario,Maldonado Tangarife,OSCAR DARIO MALDONADO TANGARIFE,M,"Cr. 36 # 9E-1 Sur, 526706, Barbacoas, Nariño",3203763116,2022-12-26,,,,True
+55,21954098,Luz Jael,Tangarife Roman,LUZ JAEL TANGARIFE ROMAN,F,"Cl. 164 # 26-84, Apto. 72, 054653, Guatapé, Antioquia",3126670106,2022-12-28,,,,True
+56,1040180020,Ximena,Castañeda Vargas,XIMENA CASTAÑEDA VARGAS,F,"Cl. 41P # 64-3 Este, Apartamento 6, 940330, Cacahual, Guainía",3121333872,2023-01-06,,,,True
+58,39439972,Adiela,Vallejo Gomez,ADIELA VALLEJO GOMEZ,F,"Av. carrera 4ª # 4-2 Este, Casa 5, 154966, Guacamayas, Boyacá",3132473178,2023-01-06,,,,True
+61,21954910,Patrcia Elena,Villada Gomez,PATRCIA ELENA VILLADA GOMEZ,F,"Avenida calle 71 # 77U-32 Este, Apto. 185, 418506, Hobo, Huila",3010801326,2023-01-26,,,,True
+62,43689028,Maria Emilsen,Alvarez Alvarez,MARIA EMILSEN ALVAREZ ALVAREZ,F,"Carrera 1V Bis K # 35-8, Etapa 9 apartamento 865, 851473, San Luis de Palenque, Casanare",3207360260,2023-01-26,,,,True
+63,1040183310,Laura Nataly,Sterling Villada,LAURA NATALY STERLING VILLADA,F,"Cl. 177 Bis U # 41-74 Este, Etapa 6 apartamento 58, 521367, Córdoba, Nariño",3134746872,2023-01-26,,,,True
+95,1040181181,Ester,Suarez Suarez,ESTER SUAREZ SUAREZ (CAM TITU),F,"Calle 91 # 42W-83 Sur, 254443, Guataquí, Cundinamarca",3104309805,2023-02-13,,,,True
+68,21954288,Gloria Eugenia,Garcia Quintero,GLORIA EUGENIA GARCIA QUINTERO,F,"Calle 5ª # 22-17 Este, 860824, Colón, Putumayo",3000978820,2023-02-27,,,,True
+70,21954401,Irma Luz,Carmona Osorio,IRMA LUZ CARMONA OSORIO,F,"Calle 102 # 5-2, Bodega 85, 274711, El Cantón del San Pablo, Chocó",3211219136,2023-04-10,,,,True
+72,43689729,Leidy Damaris,Bedoya Mejia,LEIDY DAMARIS BEDOYA MEJIA,F,"Cr. 4Y # 34-41, 154990, La Capilla, Boyacá",3019399091,2023-04-15,,,,True
+73,71112107,Dario Alonso,Arbelaez Alzate,DARIO ALONSO ARBELAEZ ALZATE,M,"Cr. 113O # 49Z-7, 134034, Arjona, Bolívar",3139985435,2023-04-17,,,,True
+74,43689677,Sora Millered,Martinez Martinez,SORA MILLERED MARTINEZ MARTINEZ,F,"Av. calle 27 # 74-5 Este, Torre 3 apartamento 5, 972499, Papunahua, Vaupés",3104624751,2023-05-05,,,,True
+78,71557284,Norbey De,Jesus Tangarife Castañeda,NORBEY DE JESUS TANGARIFE CASTAÑEDA,M,"Tr. 1ª # 14V-39 Sur, 945940, Pana Pana, Guainía",3007991183,2023-07-01,,,,True
+80,21944546,Carmen Cecilia,Mendez Tobon,CARMEN CECILIA MENDEZ TOBON,F,"Calle 62 # 57-7 Este, Bodega 57, 857565, Orocué, Casanare",3214251354,2023-12-04,,,,True
+82,52483904,Sandra Milena,Triviño Tangarife,SANDRA MILENA TRIVIÑO TANGARIFE,F,"Calle 159 # 47-50 Este, 058087, Olaya, Antioquia",3027849808,2024-04-02,,,,True
+83,70104211,Jesus Salvador,Tangarife Roman,JESUS SALVADOR TANGARIFE ROMAN,M,"Calle 171 Sur # 52-97 Este, Etapa 8 apartamento 8, 152480, Puerto Boyacá, Boyacá",3111241182,2024-04-08,,,,True
+85,3558609,Mario Alberto,Mejia Tangarife,MARIO ALBERTO MEJIA TANGARIFE,M,"Calle 7C Bis # 5-18 Sur, Oficina 838, 256398, Topaipí, Cundinamarca",3114935348,2024-04-20,,,,True
+87,1036925818,Heidy,Sorelly Arbelaez,HEIDY SORELLY ARBELAEZ,F,"Av. calle 133 # 73-1 Sur, 418867, Campoalegre, Huila",3204016400,2024-05-02,,,,True
+88,21954269,Margarita Maria,Hernandez A,MARGARITA MARIA HERNANDEZ A,F,"Avenida Luis Edward Rodríguez Sánchez # 8E-51 Sur, Oficina 70, 738951, Chaparral, Tolima",3122427868,2024-05-15,,,,True
+102,98555095,Oswaldo De,Jesus Isaza Rivera,OSWALDO DE JESUS ISAZA RIVERA,M,"Av. Caldas # 21-8, Apto. 658, 549134, Teorama, Norte de Santander",3001128059,2024-06-04,,,,True
+91/92,43689321,Gloria,Milena Narvaezgarcia,GLORIA MILENA NARVAEZGARCIA,F,"Cr. 122 # 7-4 Sur, 416238, Elías, Huila",3212620450,2024-07-24,,,,True
+96,1001660173,Manuela,Patiño Echeverry,MANUELA PATIÑO ECHEVERRY,F,"Cl. 194 # 86-54, 154821, Somondoco, Boyacá",3123315869,2024-09-27,,,,True
+104,1007222311,Maria Jose,Mejia Gomez,MARIA JOSE MEJIA GOMEZ,F,"Av. Fernando Ospina Duque # 80-59, 549440, Chitagá, Norte de Santander",3023226025,2024-11-22,,,,True
+105,10399450128,Marilyn Yulieth,Arenas Castro,MARILYN YULIETH ARENAS CASTRO,F,"Calle 64 # 32-93 Sur, Torre 4 apartamento 5, 524709, Belén, Nariño",3133421607,2024-11-22,,,,True
+107,1040182,Esteban,Marulanda Granda,ESTEBAN MARULANDA GRANDA,M,"Av. carrera 185 # 7-1 Sur, 881236, Providencia, Archipiélago de San Andrés, Providencia y Santa Catalina",3103754330,2025-04-08,,,,True
+151,43380658,Maria Estella,Valencia Castaño,MARIA ESTELLA VALENCIA CASTAÑO,F,"Avenida Pijiño del Carmen # 81H-5 Este, Apto. 845, 913709, Tarapacá, Amazonas",3106541458,2025-04-22,,,,True
+108,21953942,Betty Del,Socorro Bedoya Jurado,BETTY DEL SOCORRO BEDOYA  JURADO,F,"Avenida San José de Pare # 9-75 Este, 667113, Guática, Risaralda",3138501429,2025-09-09,,,,True
+109,1040181162,Juan Camilo,Cardona Ciro,JUAN CAMILO CARDONA CIRO,M,"Av. carrera 25 # 18L-75 Sur, Oficina 294, 155377, Viracachá, Boyacá",3110196556,2025-11-06,,,,True
+110,71556414,Renato Arturo,Roman Gutierrez,RENATO ARTURO ROMAN GUTIERREZ,M,"Cl. 193Y Este # 6H-3 Este, Apto. 8, 190532, Puerto Tejada, Cauca",3508169340,2025-12-02,,,,True
+114,1040033741,Alex Ricardo,Villada Saenz,ALEX RICARDO VILLADA SAENZ,M,"Calle 1I # 7-9, Etapa 3 apartamento 32, 052053, Amalfi, Antioquia",3130883561,2026-04-06,,,,True
+116,39456578,Carolina,Gallo Soto,CAROLINA GALLO SOTO,F,"Transversal 184V # 10-8 Sur, 088390, Juan de Acosta, Atlántico",3129514846,2026-04-10,,,,True
+117,21953559,Miryan De,Jesus Tabarez Bolivar,MIRYAN DE JESUS TABAREZ BOLIVAR,F,"Cr. 68 # 9-59 Sur, 689212, El Playón, Santander",3126482366,2026-05-02,,,,True

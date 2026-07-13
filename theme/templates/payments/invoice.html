@@ -1,0 +1,117 @@
+{% load tailwind_tags %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura {{ factura.numero }}</title>
+    {% tailwind_css %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: 80mm auto;
+            margin: 4mm;
+        }
+
+        @media print {
+            body {
+                background: #fff !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .invoice-receipt {
+                border: 0 !important;
+                box-shadow: none !important;
+                margin: 0 auto !important;
+                width: 72mm !important;
+                max-width: 72mm !important;
+            }
+        }
+    </style>
+</head>
+<body class="font-['Inter',sans-serif] bg-[#F7F4EE] min-h-screen text-[#2C1F0E]">
+    <div class="no-print flex items-center justify-between px-6 py-4">
+        <a href="{% url 'payments' %}"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-colors"
+            style="background: #EDE8DD; border: 0.5px solid #D4B96A30; color: #5a4a35;">
+            Volver a pagos
+        </a>
+        <button type="button" onclick="window.print()"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-colors"
+            style="background: #1C1410; color: #D4B96A; border: 0.5px solid #D4B96A40;">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z"></path>
+            </svg>
+            Imprimir
+        </button>
+    </div>
+
+    <main class="px-4 pb-8">
+        <section class="invoice-receipt bg-white mx-auto rounded-lg px-5 py-6" style="width: 360px; max-width: calc(100vw - 32px); border: 0.5px solid #D4B96A30; box-shadow: 0 24px 70px rgba(44, 31, 14, 0.08);">
+            <header class="text-center pb-5" style="border-bottom: 1px dashed #D4B96A80;">
+                <h1 class="text-2xl font-semibold mt-1" style="color: #2C1F0E;">La Rosa</h1>
+                <p class="text-[10px] uppercase tracking-[0.14em]" style="color: #9a8a70;">Servicios Funerarios</p>
+                <p class="text-xs mt-2" style="color: #5a4a35;">Factura de pago mensual</p>
+                <p class="text-base font-semibold mt-4" style="font-family: monospace;">{{ factura.numero }}</p>
+                <p class="text-[11px] mt-1" style="color: #5a4a35;">Fecha: {{ factura.fecha_emision|date:"Y-m-d H:i" }}</p>
+            </header>
+
+            <div class="py-5 space-y-4" style="border-bottom: 1px dashed #D4B96A80;">
+                <div>
+                   <p class="uppercase text-xs tracking-[0.14em] font-semibold" style="color: #9a8a70;">Titular</p>
+                    <p class=" text-[12px] " style="color: #2C1F0E;">{{ factura.titular.nombre }} {{ factura.titular.apellido }}</p>
+                    <p class="text-xs mt-1" style="color: #5a4a35;">CC {{ factura.titular.cedula }}</p>
+                    <p class="text-xs mt-1" style="color: #5a4a35;">Contrato #{{ factura.titular.numero_contrato }}</p>
+                </div>
+                <div>
+                    <p class="text-[10px] uppercase tracking-[0.14em] mb-2" style="color: #9a8a70;">Contacto</p>
+                    <p class="text-xs" style="color: #5a4a35;">Telefono: {{ factura.titular.telefono }}</p>
+            </div>
+
+            <div class="py-5" style="border-bottom: 1px dashed #D4B96A80;">
+                <div class="flex items-center justify-between gap-3">
+                    <div>
+                        <p class="text-[10px] uppercase tracking-[0.14em]" style="color: #9a8a70;">Periodo pagado</p>
+                        <p class="text-base font-semibold mt-1" style="color: #2C1F0E;">{{ factura.periodo_nombre }}</p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background: #E8F5EC; color: #1a6a3a;">{{ factura.get_estado_display }}</span>
+                </div>
+            </div>
+
+            <table class="w-full mt-5 text-left border-collapse">
+                <thead>
+                    <tr style="border-bottom: 1px dashed #D4B96A80;">
+                        <th class="py-3 text-[10px] uppercase tracking-[0.14em] font-medium" style="color: #9a8a70;">Concepto</th>
+                        <th class="py-3 text-right text-[10px] uppercase tracking-[0.14em] font-medium" style="color: #9a8a70;">Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #F3EFE8;">
+                        <td class="py-3 text-xs" style="color: #5a4a35;">Tarifa mensual</td>
+                        <td class="py-3 text-right text-xs" style="font-family: monospace; color: #2C1F0E;">${{ factura.monto_mensual_tarifa|floatformat:0|intcomma }}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #F3EFE8;">
+                        <td class="py-3 text-xs" style="color: #5a4a35;">Cargos unicos</td>
+                        <td class="py-3 text-right text-xs" style="font-family: monospace; color: #2C1F0E;">${{ factura.monto_cargos_unicos|floatformat:0|intcomma }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="pt-5 text-sm font-semibold" style="color: #2C1F0E;">Total pagado</td>
+                        <td class="pt-5 text-right text-lg font-semibold" style="font-family: monospace; color: #2C1F0E;">${{ factura.monto_total|floatformat:0|intcomma }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <footer class="text-center mt-6 pt-5" style="border-top: 1px dashed #D4B96A80;">
+                <p class="text-[11px]" style="color: #5a4a35;">Gracias por su pago</p>
+                <p class="text-[10px] mt-2" style="color: #9a8a70;">Conserve esta factura como soporte.</p>
+            </footer>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,33 +1,71 @@
-<aside class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between hidden md:flex">
-        <div>
-            <div class="p-6">
-                <h1 class="text-2xl font-bold text-[#5a2a3b]">La Rosa</h1>
-                <p class="text-xs text-gray-500 uppercase tracking-wider mt-1">Funeraria</p>
-            </div>
-            <nav class="mt-4">
-                <a href="{% url 'dashboard' %}" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#5a2a3b] transition-colors">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                    General
-                </a>
-                <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#5a2a3b] transition-colors">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
-                    Obits
-                </a>
-                <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#5a2a3b] transition-colors">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                    Services
-                </a>
-                <a href="{% url 'titular_list' %}" class="flex items-center px-6 py-3 font-medium">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    Titulares
-                </a>
-            </nav>
+<aside class="hidden md:flex w-56 flex-col justify-between shrink-0" style="background: #1C1410; font-family: var(--font-sans, 'Inter', sans-serif);">
+
+    <div>
+        {% comment %} {{-- Logo --}} {% endcomment %}
+        <div style="padding: 24px 20px 20px; border-bottom: 0.5px solid #3a2e22;">
+            <div style="font-size: 10px; color: #7a6a52; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px;">Servicios Funerarios</div>
+            <div style="font-size: 20px; font-weight: 500; color: #D4B96A; letter-spacing: 0.04em;">La Rosa</div>
         </div>
-        <div class="p-6">
-            <button onclick="" class="w-full bg-[#5a2a3b] hover:bg-[#461e2c] text-white font-medium py-3 px-4 rounded-lg flex justify-center items-center transition-colors">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                Nueva Afiliación
-            </button>
-        </div>
-    </aside>
+
+        {% comment %} {{-- Navegación --}} {% endcomment %}
+        <nav style="padding: 16px 0;">
+
+            <div style="font-size: 9px; color: #5a4a35; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 20px; margin-bottom: 6px;">Principal</div>
+
+            <a href="{% url 'dashboard' %}" class="flex items-center gap-2.5 px-5 py-2.5 text-[13px] text-[#9a8a70] no-underline border-l-2 border-transparent transition-all duration-150 hover:text-[#D4B96A] hover:bg-white/5 {% if request.resolver_match.url_name == 'dashboard' %} text-[#D4B96A] bg-[#D4B96A]/10 border-l-2 border-[#D4B96A] {% endif %}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                Panel general
+            </a>
+
+            <a href="{% url 'titular_list' %}" class="flex items-center gap-2.5 px-5 py-2.5 text-[13px] text-[#9a8a70] no-underline border-l-2 border-transparent transition-all duration-150 hover:text-[#D4B96A] hover:bg-white/5 {% if request.resolver_match.url_name == 'titular_list' %}text-[#D4B96A] bg-[#D4B96A]/10 border-l-2 border-[#D4B96A]{% endif %}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                Titulares
+            </a>
+
+            <a href="#" class="flex items-center gap-2.5 px-5 py-2.5 text-[13px] text-[#9a8a70] no-underline border-l-2 border-transparent transition-all duration-150 hover:text-[#D4B96A] hover:bg-white/5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                Beneficiarios
+            </a>
+
+            <div style="font-size: 9px; color: #5a4a35; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 20px; margin: 16px 0 6px;">Gestión</div>
+
+            <a href="#" class="flex items-center gap-2.5 px-5 py-2.5 text-[13px] text-[#9a8a70] no-underline border-l-2 border-transparent transition-all duration-150 hover:text-[#D4B96A] hover:bg-white/5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                Contratos
+            </a>
+
+            <a href="#" class="flex items-center gap-2.5 px-5 py-2.5 text-[13px] text-[#9a8a70] no-underline border-l-2 border-transparent transition-all duration-150 hover:text-[#D4B96A] hover:bg-white/5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                Servicios
+            </a>
+
+            <a href="{% url 'payments' %}" class="flex items-center gap-2.5 px-5 py-2.5 text-[13px] text-[#9a8a70] no-underline border-l-2 border-transparent transition-all duration-150 hover:text-[#D4B96A] hover:bg-white/5 {% if request.resolver_match.url_name == 'payments' %}text-[#D4B96A] bg-[#D4B96A]/10 border-l-2 border-[#D4B96A]{% endif %}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                Pagos
+            </a>
+
+            <div style="font-size: 9px; color: #5a4a35; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 20px; margin: 16px 0 6px;">Sistema</div>
+
+            <a href="#" class="flex items-center gap-2.5 px-5 py-2.5 text-[13px] text-[#9a8a70] no-underline border-l-2 border-transparent transition-all duration-150 hover:text-[#D4B96A] hover:bg-white/5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                Reportes
+            </a>
+
+            <a href="{% url 'config' %}" class="flex items-center gap-2.5 px-5 py-2.5 text-[13px] text-[#9a8a70] no-underline border-l-2 border-transparent transition-all duration-150 hover:text-[#D4B96A] hover:bg-white/5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Configuración
+            </a>
+
+        </nav>
+    </div>
+{% comment %} 
+    {{-- Footer: usuario + botón --}} {% endcomment %}
+    <div style="padding: 16px 20px; border-top: 0.5px solid #3a2e22;">
+        <button onclick="abrirModalTitularRegistro()" style="width:100%; background:#D4B96A; color:#1C1410; font-size:13px; font-weight:500; padding:10px 14px; border-radius:8px; border:none; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; transition: background 0.15s;" onmouseover="this.style.background='#c4a95a'" onmouseout="this.style.background='#D4B96A'">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            Nueva afiliación
+        </button>
+    </div>
+
+</aside>
 

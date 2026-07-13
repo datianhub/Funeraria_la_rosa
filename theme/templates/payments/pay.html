@@ -1,0 +1,168 @@
+{% load tailwind_tags %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Rosa - Pagos</title>
+    {% tailwind_css %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-['Inter',sans-serif] bg-[#F7F4EE] flex h-screen overflow-hidden text-[#2C1F0E]">
+    {% include "../components/nav.html" %}
+
+    <main class="flex-1 flex flex-col overflow-hidden">
+
+        <header class="flex items-center justify-between px-6 py-3 border-b flex-wrap gap-4" style="background: #F7F4EE; border-color: #D4B96A30;">
+            <form method="GET" action="{% url 'payments' %}" class="flex items-center gap-3 flex-wrap">
+                <div class="relative">
+                    <input
+                        type="text" name="q" value="{{ query|default:'' }}"
+                        placeholder="Buscar por cedula, nombre o contrato..."
+                        class="pl-8 pr-4 py-2 rounded-full text-xs outline-none transition-all duration-200"
+                        style="background: #EDE8DD; border: 0.5px solid #D4B96A30; color: #2C1F0E; width: 260px; font-family: 'Inter', sans-serif;"
+                        onfocus="this.style.width='320px'; this.style.borderColor='#D4B96A'; this.style.boxShadow='0 0 0 3px #D4B96A18';"
+                        onblur="this.style.width='260px'; this.style.borderColor='#D4B96A30'; this.style.boxShadow='none';">
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <input type="date" name="fecha_inicio" value="{{ fecha_inicio }}"
+                        class="px-3 py-2 rounded-lg text-xs outline-none cursor-pointer"
+                        style="background: #EDE8DD; border: 0.5px solid #D4B96A30; color: #5a4a35; font-family: 'Inter', sans-serif;"
+                        onfocus="this.style.borderColor='#D4B96A'; this.style.boxShadow='0 0 0 3px #D4B96A18';"
+                        onblur="this.style.borderColor='#D4B96A30'; this.style.boxShadow='none';">
+                    <span class="text-xs" style="color: #9a8a70;">a</span>
+                    <input type="date" name="fecha_fin" value="{{ fecha_fin }}"
+                        class="px-3 py-2 rounded-lg text-xs outline-none cursor-pointer"
+                        style="background: #EDE8DD; border: 0.5px solid #D4B96A30; color: #5a4a35; font-family: 'Inter', sans-serif;"
+                        onfocus="this.style.borderColor='#D4B96A'; this.style.boxShadow='0 0 0 3px #D4B96A18';"
+                        onblur="this.style.borderColor='#D4B96A30'; this.style.boxShadow='none';">
+                </div>
+
+                <button type="submit"
+                    class="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-medium transition-colors"
+                    style="background: #1C1410; color: #D4B96A; border: 0.5px solid #D4B96A40;"
+                    onmouseover="this.style.background='#2e1f14';"
+                    onmouseout="this.style.background='#1C1410';">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                    </svg>
+                    Filtrar
+                </button>
+            </form>
+
+            <div class="flex items-center gap-2 pl-4" style="border-left: 0.5px solid #D4B96A30;">
+                <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium" style="background: #D4B96A22; border: 1px solid #D4B96A44; color: #D4B96A;">A</div>
+                <span class="text-xs font-medium" style="color: #c0a870;">Admin</span>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-6">
+            <div class="flex items-start justify-between mb-5 flex-wrap gap-3">
+                <div>
+                    <h2 class="text-xl font-medium" style="color: #2C1F0E;">Modulo de pagos</h2>
+                    <p class="text-xs mt-0.5" style="color: #9a8a70;">Consulta de facturacion mensual, cargos unicos y estado de cada contrato.</p>
+                </div>
+            </div>
+
+            <div class="flex  gap-3 mb-5">
+                <div class="bg-white rounded-lg p-4" style="border: 0.5px solid #D4B96A25;">
+                    <div class="text-[10px] uppercase tracking-[0.1em]" style="color: #9a8a70;">Total a cobrar</div>
+                    <div class="text-2xl font-medium mt-1" style="color: #2C1F0E;">${{ total_recaudo|floatformat:0|intcomma }}</div>
+                </div>
+                <div class="bg-white rounded-lg p-4" style="border: 0.5px solid #D4B96A25;">
+                    <div class="text-[10px] uppercase tracking-[0.1em]" style="color: #9a8a70;">Planes al dia</div>
+                    <div class="text-2xl font-medium mt-1" style="color: #1a6a3a;">{{ pagos_activos }}</div>
+                </div>
+                <div class="bg-white rounded-lg p-4" style="border: 0.5px solid #D4B96A25;">
+                    <div class="text-[10px] uppercase tracking-[0.1em]" style="color: #9a8a70;">Planes vencidos</div>
+                    <div class="text-2xl font-medium mt-1" style="color: #8a2a1a;">{{ pagos_vencidos }}</div>
+                </div>
+            </div>
+
+            <div class="rounded-xl overflow-hidden" style="background: #fff; border: 0.5px solid #D4B96A25;">
+                <div class="overflow-x-auto w-full">
+                    <table class="w-full text-left border-collapse" style="white-space: nowrap;">
+                        <thead>
+                            <tr style="background: #F7F4EE; border-bottom: 0.5px solid #D4B96A20;">
+                                <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Contrato</th>
+                                <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Titular</th>
+                                <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Cedula</th>
+                                <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Miembros</th>
+                                <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Mes a pagar</th>
+                                <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Tarifa mensual</th>
+                                <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Cargos unicos</th>
+                                <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Total</th>
+                                <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Ultimo pago</th>
+                                <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Estado</th>
+                                <th class="px-5 py-3 text-center" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pago in pagos %}
+                            <tr class="transition-colors" style="border-bottom: 0.5px solid #f0ece4;"
+                                onmouseover="this.style.background='#FAF8F3';"
+                                onmouseout="this.style.background='transparent';">
+                                <td class="px-5 py-3.5">
+                                    <span class="font-semibold" style="font-family: monospace; font-size: 12px; color: #D4B96A;">#{{ pago.titular.numero_contrato }}</span>
+                                </td>
+                                <td class="px-5 py-4">
+                                    <div class="font-medium text-sm" style="color: #2C1F0E;">{{ pago.titular.nombre }}</div>
+                                    <div class="text-xs" style="color: #9a8a70;">{{ pago.titular.apellido }}</div>
+                                </td>
+                                <td class="px-5 py-3.5 text-xs" style="font-family: monospace; color: #5a4a35;">{{ pago.titular.cedula }}</td>
+                                <td class="px-5 py-3.5 text-xs" style="color: #5a4a35;">
+                                    {{ pago.beneficiarios_count }} beneficiario{% if pago.beneficiarios_count != 1 %}s{% endif %}
+                                    <span style="color: #c0b090;">/</span>
+                                    {{ pago.mascotas_count }} mascota{% if pago.mascotas_count != 1 %}s{% endif %}
+                                </td>
+                                <td class="px-5 py-3.5 text-xs font-medium" style="color: #5a4a35;">{{ pago.proximo_pago|date:"d \d\e F Y"  }}</td>
+                                <td class="px-5 py-3.5 text-xs" style="font-family: monospace; color: #5a4a35;">${{ pago.monto_mensual_tarifa|floatformat:0|intcomma }}</td>
+                                <td class="px-5 py-3.5 text-xs" style="font-family: monospace; color: #5a4a35;">${{ pago.monto_cargos_unicos|floatformat:0|intcomma }}</td>
+                                <td class="px-5 py-3.5 text-xs font-semibold" style="font-family: monospace; color: #2C1F0E;">${{ pago.monto_total_a_pagar|floatformat:0|intcomma }}</td>
+                                <td class="px-5 py-3.5 text-xs" style="color: #9a8a70;">{{ pago.fecha_ultimo_pago|date:"d \d\e F Y H:i" }}</td>
+                                <td class="px-5 py-3.5">
+                                    {% if pago.plan_vencido %}
+                                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium" style="background: #FBEAE6; color: #8a2a1a;">Vencido</span>
+                                    {% else %}
+                                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium" style="background: #E8F5EC; color: #1a6a3a;">Al dia</span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-5 py-3.5 text-center">
+                                    <form method="POST" action="{% url 'generate_invoice' pago.id %}">
+                                        {% csrf_token %}
+                                        <button title="Preparar factura"
+                                            class="inline-flex items-center justify-center p-1.5 rounded-md transition-all"
+                                            style="background: none; border: 0.5px solid #D4B96A30; color: #9a8a70;"
+                                            onmouseover="this.style.borderColor='#D4B96A'; this.style.color='#8a6a10'; this.style.background='#D4B96A10';"
+                                            onmouseout="this.style.borderColor='#D4B96A30'; this.style.color='#9a8a70'; this.style.background='none';">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z"></path>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="12" class="py-12 text-center text-xs" style="color: #9a8a70; background: #FAF8F3;">
+                                    No hay pagos registrados para los filtros seleccionados.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex items-center justify-between px-5 py-3" style="background: #F7F4EE; border-top: 0.5px solid #D4B96A20;">
+                    <span class="text-xs" style="color: #9a8a70;">
+                        {{ pagos|length }} pago{% if pagos|length != 1 %}s{% endif %} encontrado{% if pagos|length != 1 %}s{% endif %}
+                    </span>
+                    <span class="text-xs" style="color: #9a8a70;">Factura lista para impresion desde acciones</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,50 +1,95 @@
 <dialog id="modal_beneficiarios" class="modal">
-    <div class="modal-box max-w-2xl bg-white p-6 rounded-2xl shadow-xl">
-    
-    <div class="flex justify-between items-start border-b border-gray-100 pb-4 mb-4">
-        <div>
-            <h3 class="font-bold text-xl text-gray-900">Beneficiarios Asociados</h3>
-            <p id="modal_titular_nombre" class="text-sm text-[#5a2a3b] font-medium mt-0.5"></p>
-            <div class="mt-2">
-                <button onclick="abrirRegistroBeneficiario(titularSeleccionadoId)" class="w-min bg-[#5a2a3b] hover:bg-[#461e2c] text-white text-sm font-medium py-3 px-4 rounded-lg ">
-                   Añadir Beneficiario 
+    <div class="modal-box max-w-3xl p-0 rounded-2xl shadow-xl overflow-hidden bg-[#F7F4EE] border border-[#D4B96A]/30">
 
-                <button>
+        {# Encabezado del Modal #}
+        <div class="flex justify-between items-start px-6 py-5 bg-[#1C1410] border-b border-[#3a2e22]">
+            <div>
+                <p class="uppercase tracking-widest mb-1 text-[9px] text-[#5a4a35]">La Rosa — Servicios Funerarios</p>
+                <h3 class="font-medium text-lg text-[#D4B96A]">Beneficiarios Asociados</h3>
+                <p id="modal_titular_nombre" class="text-xs mt-0.5 text-[#7a6a52]"></p>
             </div>
+            <form method="dialog">
+                <button class="flex items-center justify-center w-7 h-7 rounded-full text-sm cursor-pointer bg-[#D4B96A]/10 border border-[#D4B96A]/40 text-[#D4B96A] transition-colors hover:bg-[#D4B96A]/20">✕</button>
+            </form>
         </div>
-        <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost text-gray-400 hover:text-gray-600">✕</button>
-        </form>
+
+        {# Cuerpo del Modal #}
+        <div class="px-6 py-5">
+
+            {# Título de Sección + Acción de Añadir #}
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-0.5 h-3.5 rounded-sm bg-[#D4B96A]"></div>
+                    <span class="uppercase tracking-widest font-medium text-[10px] text-[#7a6a52]">Listado de beneficiarios</span>
+                </div>
+                <div>
+                    <button
+                        onclick="abrirRegistroBeneficiario(titularSeleccionadoId)"
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#D4B96A] text-[#1C1410] cursor-pointer transition-colors duration-150 hover:bg-[#c4a95a]">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Añadir beneficiario
+                    </button>
+                    <button
+                        onclick="abrirRegistroMascota(titularSeleccionadoId)"
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#D4B96A] text-[#1C1410] cursor-pointer transition-colors duration-150 hover:bg-[#c4a95a]">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Añadir Mascota
+                    </button>
+                </div>
+            </div>
+
+            {# Contenedor de Tabla #}
+            <div class="rounded-xl overflow-hidden border border-[#D4B96A]/25">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse table-auto whitespace-nowrap">
+                        <thead>
+                            <tr class="bg-[#F7F4EE] border-b border-[#D4B96A]/20">
+                                <th class="px-4 py-3 text-[9px] font-medium text-[#9a8a70] tracking-wider uppercase">Nombre completo</th>
+                                <th class="px-4 py-3 text-[9px] font-medium text-[#9a8a70] tracking-wider uppercase">Cédula</th>
+                                <th class="px-4 py-3 text-[9px] font-medium text-[#9a8a70] tracking-wider uppercase">Parentesco</th>
+                                <th class="px-4 py-3 text-[9px] font-medium text-[#9a8a70] tracking-wider uppercase">Edad</th>
+                                <th class="px-4 py-3 text-[9px] font-medium text-[#9a8a70] tracking-wider uppercase">Fecha afiliación</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla_beneficiarios_cuerpo" class="bg-white divide-y divide-[#f0ece4] text-xs text-[#2C1F0E]">
+                            {# Los datos dinámicos inyectados por JS deben mantener clases de padding en sus <td>, ej: class="px-4 py-3.5" #}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {# Estado de Carga / Mensajes Dinámicos #}
+            <div id="modal_mensaje_estado" class="hidden text-center py-8 text-xs text-[#9a8a70] font-['Inter',sans-serif]">
+                Cargando beneficiarios...
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="overflow-x-auto">
-        <table class="w-full text-sm text-left">
-            <thead class="text-xs uppercase tracking-wider text-gray-500 bg-gray-50">
-                <tr>
-                    <th class="py-3 px-4">Nombre Completo</th>
-                    <th class="py-3 px-4">Cédula</th>
-                    <th class="py-3 px-4">Parentesco</th>
-                    <th class="py-3 px-4">Edad</th>
-                    <th class="py-3 px-4">Fecha de Afiliación</th>
-                </tr>
-            </thead>
-            <tbody id="tabla_beneficiarios_cuerpo" class="divide-y divide-gray-100">
-                </tbody>
-        </table>
+    {# Fondo oscuro de cierre #}
+    <form method="dialog" class="modal-backdrop">
+        <button class="cursor-default">close</button>
+    </form>
+    <div class="flex items-center justify-between px-6 py-3 border-t border-[#D4B96A]/20 bg-[#F7F4EE] rounded-lg">
+    <span class="text-xs text-[#7a6a52] m-1" id="texto-paginacion">Página 1 de 1</span>
+        <div class="inline-flex gap-2">
+            <button id="btn-anterior" onclick="cargarPaginaAnterior()" class="px-3 py-1 text-xs font-medium rounded-lg bg-[#D4B96A]/10 border border-[#D4B96A]/30 text-[#5a4a35] disabled:opacity-40 disabled:cursor-not-allowed">
+                Anterior
+            </button>
+            <button id="btn-siguiente" onclick="cargarPaginaSiguiente()" class="px-3 py-1 text-xs font-medium rounded-lg bg-[#D4B96A] text-[#1C1410] disabled:opacity-40 disabled:cursor-not-allowed">
+                Siguiente
+            </button>
+        </div>
     </div>
-    
-    <div id="modal_mensaje_estado" class="text-center py-6 text-gray-400 hidden">
-        Cargando beneficiarios...
-    </div>
-  </div>
-  
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
 </dialog>
 
 {% include "./registro_beneficiario.html" %}
+{% include "./crearMascotaFormModal.html"%}
 
 <script>
     function abrirRegistroBeneficiario(titularId){
@@ -54,9 +99,26 @@
         inputTitular.value = titularId;
         }
 
-    const modalRegistroBeneficiario = document.getElementById('modal_registro_beneficiario');
-    if (modalRegistroBeneficiario) {
-        modalRegistroBeneficiario.showModal();
+        const modalRegistroBeneficiario = document.getElementById('modal_registro_beneficiario');
+        if (modalRegistroBeneficiario) {
+            modalRegistroBeneficiario.showModal();
+        }
     }
-}
+
+    function abrirRegistroMascota(titularId){
+        const inputTitularId = document.getElementById('id_titular_mascota');
+        if (inputTitularId){
+            inputTitularId.value = titularId
+        }else{
+            console.error("No se encontró el input 'id_titular_mascota' en el DOM");
+        }
+
+        const modalRegistroMascota = document.getElementById('modal_registro_mascota');
+        if ( modalRegistroMascota){
+            modalRegistroMascota.showModal();
+        }
+
+    }
+
+
 </script>

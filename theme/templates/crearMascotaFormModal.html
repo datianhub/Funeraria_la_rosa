@@ -1,0 +1,133 @@
+<dialog id="modal_registro_mascota" class="modal">
+    <div class="modal-box w-2/5 max-w-5xl h-max p-0 rounded-2xl shadow-xl overflow-hidden bg-[#F7F4EE] border border-[#D4B96A]/30">
+
+        {# Encabezado del Modal #}
+        <div class="flex justify-between items-start px-6 py-5 border-b border-[#3a2e22]">
+            <div>
+                <p class="uppercase tracking-widest mb-1 text-[9px] text-[#5a4a35]">La Rosa — Servicios Funerarios</p>
+                <h3 class="font-medium text-lg text-[#3a2e22]">Registrar Mascota</h3>
+                <p class="text-xs mt-0.5 text-[#7a6a52]">Completa los campos para asociar la mascota al titular</p>
+            </div>
+            <form method="dialog">
+                <button class="flex items-center justify-center w-7 h-7 rounded-full text-sm cursor-pointer bg-[#D4B96A]/10 border border-[#D4B96A]/40 text-[#D4B96A] transition-colors hover:bg-[#D4B96A]/20">✕</button>
+            </form>
+        </div>
+
+        {# Cuerpo del Formulario #}
+        <div class="p-6">
+            <form id="form-registro-mascota" action="{% url 'crear_mascota' %}" method="POST">
+                {% csrf_token %}
+                {{ form_mascota.titular }}
+
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-0.5 h-3.5 rounded-sm bg-[#D4B96A]"></div>
+                    <span class="uppercase tracking-widest font-medium text-[10px] text-[#7a6a52]">Datos de la mascota</span>
+                </div>
+
+                <div class="grid grid-cols-1 gap-3 mb-5">
+
+                    {# Campo: Nombre Completo #}
+                    <div class="col-span-1 flex flex-col gap-1">
+                        <label class="font-medium text-[11px] text-[#5a4a35]" for="{{ form_mascota.nombre.id_for_label }}">
+                            Nombre<span class="text-[#D4B96A]">*</span>
+                        </label>
+                        {{ form_mascota.nombre }}
+                        {% if form_mascota.nombre.errors %}
+                            <div class="text-white text-xs rounded px-2 py-1 mt-0.5 bg-[#8a2a10] shadow-sm">{{ form_beneficiario.nombre_completo.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    {# Campo: Cédula #}
+                    <div class="col-span-1 flex flex-col gap-1">
+                        <label class="font-medium text-[11px] text-[#5a4a35]" for="{{ form_mascota.especie.id_for_label }}">
+                            Especie <span class="text-[#D4B96A]">*</span>
+                        </label>
+                        {{ form_mascota.especie }}
+                        {% if form_mascota.especie.errors %}
+                            <div class="text-white text-xs rounded px-2 py-1 mt-0.5 bg-[#8a2a10] shadow-sm">{{ form_beneficiario.cedula.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                {# Botón de Envío #}
+                <button type="submit"
+                    class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg text-sm font-medium bg-[#D4B96A] text-[#1C1410] cursor-pointer transition-colors duration-150 hover:bg-[#c4a95a]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Guardar Mascota
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+
+    {# Fondo oscuro de cierre #}
+    <form method="dialog" class="modal-backdrop">
+        <button class="cursor-default">close</button>
+    </form>
+</dialog>
+<script>
+    document.getElementById('form-registro-mascota').addEventListener('submit', function(e) {
+    e.preventDefault(); // Evita que la página se recargue
+
+    const formulario = this;
+    const formData = new FormData(formulario);
+
+    fetch(formulario.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest' // Para que Django sepa que es AJAX
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // 1. Agregar la mascota visualmente a la tabla/lista
+            agregarMascotaATabla(data.mascota);
+
+            // 2. Limpiar el formulario para un próximo registro
+            formulario.reset();
+
+            // 3. Cerrar el modal de la mascota
+            const modal = document.getElementById('modal_registro_mascota');
+            if (modal) modal.close();
+            
+            alert('¡Mascota guardada con éxito!');
+        } else {
+            // Manejo de errores por si falla la validación de Django
+            console.error('Errores del formulario:', data.errors);
+            alert('Hubo un error al validar los datos de la mascota.');
+        }
+    })
+    .catch(error => {
+        console.error('Error en la petición:', error);
+    });
+});
+
+// Función auxiliar para inyectar la fila dinámicamente en el HTML
+function agregarMascotaATabla(mascota) {
+    const cuerpoTabla = document.getElementById('tabla_beneficiarios_cuerpo');
+    if (!cuerpoTabla) return;
+
+    // Creamos la nueva fila HTML
+    const nuevaFila = document.createElement('tr');
+    nuevaFila.className = "bg-white divide-y divide-[#f0ece4] text-xs text-[#2C1F0E]";
+    
+    // Adaptamos las columnas a tu diseño. 
+    // Como es una mascota, rellenamos o adaptamos los campos de Cédula/Parentesco según prefieras
+    nuevaFila.innerHTML = `
+        <td class="px-4 py-3.5 font-medium">${mascota.nombre} (🐾 Mascota)</td>
+        <td class="px-4 py-3.5">-</td>
+        <td class="px-4 py-3.5">${mascota.especie}</td>
+        <td class="px-4 py-3.5">-</td>
+        <td class="px-4 py-3.5">Recién agregado</td>
+    `;
+
+    // Insertamos al principio o al final de la tabla
+    cuerpoTabla.appendChild(nuevaFila);
+}
+</script>

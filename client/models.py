@@ -18,7 +18,8 @@ class Titular(models.Model):
     ocupacion = models.CharField(max_length=150, null=True, blank=True)
     direccion = models.CharField(max_length=255)
     telefono = models.BigIntegerField()
-    fecha_ingreso = models.DateField()
+    fecha_ingreso = models.DateField(auto_now_add=True)
+    plan_activo = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'Titular'
@@ -39,18 +40,11 @@ class Beneficiario(models.Model):
     nombre_completo = models.CharField(max_length=200)
     cedula = models.BigIntegerField(unique=True)
     parentesco = models.CharField(max_length=100)
-    edad_afiliacion = models.PositiveSmallIntegerField()
-    edad_actual = models.PositiveSmallIntegerField()
+    edad_afiliacion = models.PositiveSmallIntegerField(null=True, blank=False)
+    edad_actual = models.PositiveSmallIntegerField(null=True, blank=True)
     fecha_afiliacion = models.DateField(auto_now_add=True)
-    mascota = models.BooleanField(default=False)
-    tipo_mascota = models.CharField(max_length=100, null=True, blank=True)
+    cobro_edad_aplicado = models.BooleanField(default=False)
     notas = models.TextField(null=True, blank=True)
-
-    def clean(self):
-        if not self.mascota and self.tipo_mascota:
-            raise ValidationError("No se puede definir tipo de mascota si 'mascota' es False.")
-        if self.mascota and not self.tipo_mascota:
-            raise ValidationError("Debes especificar el tipo de mascota.")
 
     class Meta:
         db_table = 'Beneficiario'
@@ -59,3 +53,18 @@ class Beneficiario(models.Model):
 
     def __str__(self):
         return f"{self.nombre_completo} (Titular: {self.titular})"
+    
+
+class Mascota(models.Model):
+    titular = models.ForeignKey(Titular, on_delete=models.CASCADE, related_name='mascotas')
+    nombre = models.CharField(max_length=100, blank=True, null=True)
+    especie = models.CharField(max_length=50)
+    fecha_afiliacion = models.DateField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'Mascota'
+        verbose_name = 'Mascota'
+        verbose_name_plural = 'Mascotas'
+
+    def __str__(self):
+        return f"Nombre mascota : {self.nombre} ,Especie: {self.especie} , Titular : {self.titular}"
