@@ -166,5 +166,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TAILWIND_APP_NAME = 'theme'
 
-# settings.py (Al final del archivo)
-NPM_BIN_PATH = r"/home/datian/.nvm/versions/node/v24.18.0/bin/npm"
+if DEBUG:
+    NPM_BIN_PATH = r"/home/datian/.nvm/versions/node/v24.18.0/bin/npm"
