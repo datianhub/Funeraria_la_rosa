@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=lambda v: [s.strip() for s in v.split(',')])
 
 
 # Application definition
@@ -92,18 +92,27 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 #for Mysql
+#DATABASES = {
+#   'default' : {
+#        'ENGINE' : 'django.db.backends.mysql',
+#       'NAME':config('DB_NAME'),
+#       'USER': config('DB_USER'),
+#       'PASSWORD': config('DB_PASSWORD'),
+#       'HOST': config('DB_HOST', default='localhost'),
+#       'PORT': config('DB_PORT', default='3306'),
+#       'OPTIONS': {
+#           'charset': 'utf8mb4',
+#       },
+#   }
+#}
+
+import dj_database_url
+
 DATABASES = {
-    'default' : {
-        'ENGINE' : 'django.db.backends.mysql',
-        'NAME':config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='3306'),
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-        },
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL', default='sqlite:///db.sqlite3'),
+        conn_max_age=600
+    )
 }
 
 
