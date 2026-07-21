@@ -10,12 +10,14 @@ dj-database-url==3.1.2
 Django==6.0.5
 django-environ==0.13.0
 django-tailwind==4.4.2
+gunicorn==26.0.0
 idna==3.16
 Jinja2==3.1.6
 markdown-it-py==4.2.0
 MarkupSafe==3.0.3
 mdurl==0.1.2
 mysqlclient==2.2.8
+packaging==26.2
 psycopg2-binary==2.9.12
 Pygments==2.20.0
 pytailwindcss==0.3.0
