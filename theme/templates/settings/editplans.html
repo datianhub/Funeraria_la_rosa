@@ -1,0 +1,88 @@
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Configuración</title>
+    {% tailwind_css %}
+</head>
+<body class="bg-[#F7F4EE]">
+    <div class="max-w-2xl mx-auto mt-10 bg-white p-8 rounded-lg shadow">
+        
+        <h1 class="text-2xl font-bold mb-6 text-[#2C1F0E]">Editar Configuración</h1>
+        
+        <!-- Mostrar errores si los hay -->
+        {% if form.non_field_errors %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form action="{% url 'editar_configuracion' plan.id %}" method="POST" class="space-y-4">
+            {% csrf_token %}
+
+            <div>
+                <label for="{{ form.valor_mensual.id_for_label }}" class="block font-medium mb-2">
+                    Valor Mensual
+                </label>
+                {{ form.valor_mensual }}
+                {% if form.valor_mensual.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ form.valor_mensual.errors }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.valor_mascotas.id_for_label }}" class="block font-medium mb-2">
+                    Valor Mascotas
+                </label>
+                {{ form.valor_mascotas }}
+                {% if form.valor_mascotas.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ form.valor_mascotas.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Campo Teléfono -->
+            <div>
+                <label for="{{ form.valor_beneficiario_extra.id_for_label }}" class="block font-medium mb-2">
+                    Valor Beneficiario Extra 
+                </label>
+                {{ form.valor_beneficiario_extra }}
+                {% if form.valor_beneficiario_extra.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ form.valor_beneficiario_extra.errors }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.valor_cobro_edad.id_for_label }}" class="block font-medium mb-2">
+                    Valor Cobro Edad
+                </label>
+                {{ form.valor_cobro_edad }}
+                {% if form.valor_cobro_edad.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ form.valor_cobro_edad.errors }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.edad_maxima.id_for_label }}" class="block font-medium mb-2">
+                    Edad Máxima
+                </label>
+                {{ form.edad_maxima }}
+                {% if form.edad_maxima.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ form.edad_maxima.errors }}</p>
+                {% endif %}
+
+            <!-- Botones -->
+            <div class="flex gap-4 mt-6">
+                <button type="submit" class="bg-[#D4B96A] text-white px-6 py-2 rounded font-medium hover:bg-[#c4a95a]">
+                    Guardar cambios
+                </button>
+                <a href="{% url 'config' %}" class="bg-gray-400 text-white px-6 py-2 rounded font-medium hover:bg-gray-500">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

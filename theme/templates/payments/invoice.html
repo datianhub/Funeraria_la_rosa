@@ -1,4 +1,5 @@
 {% load tailwind_tags %}
+{% load static %}
 {% load humanize %}
 <!DOCTYPE html>
 <html lang="es" data-theme="light">
@@ -51,28 +52,28 @@
     </div>
 
     <main class="px-4 pb-8">
-        <section class="invoice-receipt bg-white mx-auto rounded-lg px-5 py-6" style="width: 360px; max-width: calc(100vw - 32px); border: 0.5px solid #D4B96A30; box-shadow: 0 24px 70px rgba(44, 31, 14, 0.08);">
-            <header class="text-center pb-5" style="border-bottom: 1px dashed #D4B96A80;">
-                <h1 class="text-2xl font-semibold mt-1" style="color: #2C1F0E;">La Rosa</h1>
+        <section class="invoice-receipt bg-white mx-auto rounded-lg px-5 py-6 " style="width: 360px; max-width: calc(100vw - 32px); border: 0.5px solid #D4B96A30; box-shadow: 0 24px 70px rgba(44, 31, 14, 0.08);">
+            <header class="text-center pb-5 " style="border-bottom: 1px dashed #D4B96A80 ;">
+                <h1 class="text-2xl font-semibold mt-4" style="color: #2C1F0E;">La Rosa</h1>
                 <p class="text-[10px] uppercase tracking-[0.14em]" style="color: #9a8a70;">Servicios Funerarios</p>
-                <p class="text-xs mt-2" style="color: #5a4a35;">Factura de pago mensual</p>
+                <p class="text-xs mt-2" style="color: #5a4a35;">Nit : 71.556.799-3</p>
+                <p class="text-xs mt-2" style="color: #5a4a35;">Calle 20 N° 18 - 11</p>
+                <p class="text-xs" style="color: #5a4a35;">El Retiro - Antioquia</p>
+                <p class="text-xs" style="color: #5a4a35;">324 747 8600</p>
+                <p class="text-xs" style="color: #5a4a35;">larosaservifun@gmail.com</p>
                 <p class="text-base font-semibold mt-4" style="font-family: monospace;">{{ factura.numero }}</p>
                 <p class="text-[11px] mt-1" style="color: #5a4a35;">Fecha: {{ factura.fecha_emision|date:"Y-m-d H:i" }}</p>
             </header>
 
             <div class="py-5 space-y-4" style="border-bottom: 1px dashed #D4B96A80;">
                 <div>
-                   <p class="uppercase text-xs tracking-[0.14em] font-semibold" style="color: #9a8a70;">Titular</p>
-                    <p class=" text-[12px] " style="color: #2C1F0E;">{{ factura.titular.nombre }} {{ factura.titular.apellido }}</p>
-                    <p class="text-xs mt-1" style="color: #5a4a35;">CC {{ factura.titular.cedula }}</p>
-                    <p class="text-xs mt-1" style="color: #5a4a35;">Contrato #{{ factura.titular.numero_contrato }}</p>
+                   <p class="uppercase text-xs tracking-[0.14em] font-bold">Datos del Titular</p>
+                    <p class=" text-[12px] " style="color: #2C1F0E;">Nombre: {{ factura.titular.nombre }} {{ factura.titular.apellido }}</p>
+                    <p class="text-xs mt-1" style="color: #2C1F0E;">Cedula: {{ factura.titular.cedula }}</p>
+                    <p class="text-xs mt-1" style="color: #2C1F0E;">Contrato #{{ factura.titular.numero_contrato }}</p>
                 </div>
-                <div>
-                    <p class="text-[10px] uppercase tracking-[0.14em] mb-2" style="color: #9a8a70;">Contacto</p>
-                    <p class="text-xs" style="color: #5a4a35;">Telefono: {{ factura.titular.telefono }}</p>
-            </div>
 
-            <div class="py-5" style="border-bottom: 1px dashed #D4B96A80;">
+            <div class="py-1" style="border-bottom: 1px dashed #D4B96A80;">
                 <div class="flex items-center justify-between gap-3">
                     <div>
                         <p class="text-[10px] uppercase tracking-[0.14em]" style="color: #9a8a70;">Periodo pagado</p>

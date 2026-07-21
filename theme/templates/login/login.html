@@ -1,0 +1,117 @@
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Rosa - Login</title>
+    {% tailwind_css %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-['Inter',sans-serif] bg-gradient-to-br from-[#F7F4EE] to-[#EBE5D9] min-h-screen flex items-center justify-center">
+
+    <main class="w-full max-w-md px-6">
+        <div class="text-center mb-10">
+            <div class="inline-block mb-4">
+                <div class="w-16 h-16 bg-[#D4B96A]/20 rounded-full flex items-center justify-center border border-[#D4B96A]/40">
+                    <svg class="w-8 h-8 text-[#D4B96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-3xl font-bold text-[#2C1F0E] mb-2">La Rosa</h1>
+            <p class="text-[#7a6a52] text-sm">Servicios Funerarios</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg border border-[#D4B96A]/20 p-8 backdrop-blur">
+            
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-[#2C1F0E] mb-1">Iniciar sesión</h2>
+            </div>
+
+            {% if form.non_field_errors %}
+                <div class="mb-6 p-4 bg-[#8a2a10]/10 border border-[#8a2a10]/30 rounded-lg">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-[#8a2a10] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-[#8a2a10] text-sm">Error en el inicio de sesión</p>
+                            {% for error in form.non_field_errors %}
+                                <p class="text-[#8a2a10] text-sm mt-1">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <form action="{% url 'login' %}" method="post" class="space-y-5">
+                {% csrf_token %}
+                
+                <div>
+                    <label for="username" class="block text-sm font-medium text-[#5a4a35] mb-2">
+                        Usuario <span class="text-[#D4B96A]">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        name="username" 
+                        id="username"
+                        placeholder="Ingresa tu usuario"
+                        class="w-full px-4 py-3 border border-[#D4B96A]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4B96A] focus:border-transparent bg-[#F7F4EE] text-[#2C1F0E] placeholder-[#9a8a70] transition-all"
+                        required
+                    >
+                    {% if form.username.errors %}
+                        <div class="mt-2 p-3 bg-[#8a2a10]/10 border border-[#8a2a10]/30 rounded">
+                            <p class="text-[#8a2a10] text-xs font-medium flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                </svg>
+                                {{ form.username.errors.0 }}
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-[#5a4a35] mb-2">
+                        Contraseña <span class="text-[#D4B96A]">*</span>
+                    </label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="password"
+                        placeholder="Ingresa tu contraseña"
+                        class="w-full px-4 py-3 border border-[#D4B96A]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4B96A] focus:border-transparent bg-[#F7F4EE] text-[#2C1F0E] placeholder-[#9a8a70] transition-all"
+                        required
+                    >
+                    {% if form.password.errors %}
+                        <div class="mt-2 p-3 bg-[#8a2a10]/10 border border-[#8a2a10]/30 rounded">
+                            <p class="text-[#8a2a10] text-xs font-medium flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                </svg>
+                                {{ form.password.errors.0 }}
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <button 
+                    type="submit"
+                    class="w-full bg-gradient-to-r from-[#D4B96A] to-[#c4a95a] text-[#1C1410] font-semibold py-3 px-4 rounded-lg hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 mt-6 border border-[#D4B96A]/30"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                    </svg>
+                    Ingresar
+                </button>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-[#D4B96A]/20 text-center text-xs text-[#7a6a52]">
+                <p>© 2026 La Rosa - Servicios Funerarios</p>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

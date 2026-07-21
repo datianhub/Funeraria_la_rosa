@@ -22,7 +22,31 @@
 
             <div>
                 <h3 class="text-sm text-[#9a8a70] uppercase">Configuración de planes</h3>
-                
+                {% if configuration %}
+                    <div class="mt-4">
+                        {% for plan_id, plan_data in configuration.items %}
+                            <div class="mb-4 p-4 border rounded-lg bg-[#F0E8D8]">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="text-base font-semibold mb-2">Valores actuales</h4>
+                                    <a href="{% url 'editar_configuracion' plan_id %}" class="text-[#D4B96A] bg-orange-950 text-white px-4 py-2 rounded font-semibold hover:bg-[#c4a95a]">Editar</a>
+                                </div>
+                                <ul class="list-disc pl-5 text-sm text-[#7a6a52]">
+                                    <li class="font-semibold">Valor Mensual: {{ plan_data.valor_mensual|intcomma }} COP</li>
+                                    <li class="font-semibold">Valor Mascotas: {{ plan_data.valor_mascotas|intcomma }} COP</li>
+                                    <li class="font-semibold">Valor Beneficiario Extra: {{ plan_data.valor_beneficiario_extra|intcomma }} COP</li>
+                                    <li class="font-semibold">Valor Cobro Edad: {{ plan_data.valor_cobro_edad|intcomma }} COP</li>
+                                    <li class="font-semibold">Edad Máxima: {{ plan_data.edad_maxima }} años</li>
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-sm text-[#9a8a70] mt-2">No hay planes configurados.</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <h3 class="text-sm text-[#9a8a70] uppercase">Configuración de Usuario</h3>
             </div>
         </div>
 

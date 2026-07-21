@@ -4,9 +4,10 @@ from django.db import transaction
 from django.db.models import Count, Q, Sum
 from django.views.decorators.http import require_POST
 
-from .models import Factura, Pago
+from .models import Factura, Pago, Plan
 from .services import generar_factura_para_pago
 from client.models import Mascota, Beneficiario
+
 
 # Create your views here.
 def payments_dashboard(request):
@@ -73,25 +74,27 @@ def invoice_detail(request, factura_id):
 
 def calcular_monto_plan(id_titular):
     try:
+        plan = Plan.objects.first()
+        
         with transaction.atomic():
             pago_titular_asociado = Pago.objects.get(titular_id=id_titular)
-            tarifa_mensual = 24000
+            tarifa_mensual = plan.valor_mensual
 
             mascotas_asociadas = Mascota.objects.filter(titular_id=id_titular).count()
             if mascotas_asociadas > 0:
-                tarifa_mensual += (mascotas_asociadas * 6000)
+                tarifa_mensual += (mascotas_asociadas * plan.valor_mascotas)
 
             beneficiarios_asociados = Beneficiario.objects.filter(titular_id=id_titular)
             beneficiarios_asociados_cantidad = beneficiarios_asociados.count()
             if beneficiarios_asociados_cantidad > 5:
                 beneficiarios_extra = beneficiarios_asociados_cantidad - 5
-                tarifa_mensual += (beneficiarios_extra * 4000)
+                tarifa_mensual += (beneficiarios_extra * plan.valor_beneficiario_extra)
 
             mayores_de_rango_edad = beneficiarios_asociados.filter(edad_afiliacion__gt=65, cobro_edad_aplicado=False)
             nuevos_recargos_unicos = 0
             for b in mayores_de_rango_edad:
                 monto_extra_por_edad = b.edad_afiliacion - 65
-                nuevos_recargos_unicos += (monto_extra_por_edad * 3000)
+                nuevos_recargos_unicos += (monto_extra_por_edad * plan.valor_cobro_edad)
 
                 b.cobro_edad_aplicado = True
                 b.save()

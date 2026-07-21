@@ -6,6 +6,19 @@ from django.db import models
 from client.models import Titular
 # Create your models here.
 
+class Plan(models.Model):
+    valor_mensual = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_mascotas = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_beneficiario_extra = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_cobro_edad = models.DecimalField(max_digits=10, decimal_places=2)
+    edad_maxima = models.PositiveIntegerField(default=65, verbose_name="Edad Máxima")
+
+    class Meta:
+        db_table = 'Plan'
+        verbose_name = 'Plan'
+        verbose_name_plural = 'Planes'
+
+
 class Pago(models.Model):
     titular = models.ForeignKey(Titular, on_delete=models.CASCADE)
     monto_cargos_unicos = models.DecimalField(max_digits=10, decimal_places=2)

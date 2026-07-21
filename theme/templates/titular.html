@@ -93,7 +93,6 @@
                                 <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">N° Contrato</th>
                                 <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Titular</th>
                                 <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Cédula</th>
-                                <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Sexo</th>
                                 <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Edad</th>
                                 <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Teléfono</th>
                                 <th class="px-5 py-3" style="font-size: 9px; font-weight: 500; color: #9a8a70; letter-spacing: 0.1em; text-transform: uppercase;">Fecha ingreso</th>
@@ -116,15 +115,6 @@
                                 </td>
 
                                 <td class="px-5 py-3.5 text-xs" style="font-family: monospace; color: #5a4a35;">{{ titular.cedula }}</td>
-
-                                <td class="px-5 py-3.5">
-                                    {% if titular.sexo == 'M' %}
-                                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium" style="background: #E6F1FB; color: #0C447C;">Masculino</span>
-                                    {% else %}
-                                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium" style="background: #FBEAF0; color: #72243E;">Femenino</span>
-                                    {% endif %}
-                                </td>
-
                                 <td class="px-5 py-3.5 text-xs" style="color: #5a4a35;">
                                     {% if titular.edad %}{{ titular.edad }} años{% else %}<span style="color: #c0b090;">—</span>{% endif %}
                                 </td>
@@ -136,7 +126,9 @@
                                 <td class="px-5 py-3.5 text-center">
                                     <div class="inline-flex items-center gap-1.5">
 
-                                        <button title="Editar"
+                                        <button 
+                                            onclick="abrirModalContrato('{{ titular.id }}')"
+                                            title="Contrato completo"
                                             class="flex items-center p-1.5 rounded-md transition-all"
                                             style="background: none; border: 0.5px solid #D4B96A30; color: #9a8a70;"
                                             onmouseover="this.style.borderColor='#D4B96A'; this.style.color='#8a6a10'; this.style.background='#D4B96A10';"
@@ -190,7 +182,7 @@
     </main>
 
 
-
+    {% include 'modal_contrato.html' %}
     {% include 'modal_beneficiario.html' %}
     {% include 'modal_titular.html' with form=form %}
 
@@ -229,6 +221,14 @@
         const modalTitular = document.getElementById('modal_titulares');
         if (modalTitular) {
             modalTitular.showModal();
+        }
+    }
+
+    function abrirModalContrato(titularId){
+        cargarDataContrato(titularId);
+        const modalContrato = document.getElementById('modal_contrato');
+        if (modalContrato) {
+            modalContrato.showModal();
         }
     }
 
@@ -312,6 +312,52 @@
             .catch(error => {
                 console.error("Error cargando la paginación:", error);
                 if (msgEstado) msgEstado.innerText = "Error al cargar los datos.";
+            });
+    }
+
+    function cargarDataContrato(titularId) {
+        const modalContrato = document.getElementById('modal_contrato');
+        if (!modalContrato) return;
+
+        const contenidoContrato = document.getElementById('contenido-contrato');
+        if (!contenidoContrato) return;
+
+        contenidoContrato.innerHTML = "<p class='text-xs text-[#9a8a70] py-8'>Cargando contrato...</p>";
+
+        fetch(`/obtener-contrato/${titularId}/`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Datos del contrato:", data);
+                if(data){
+                    const planActivo = data.contenido.titular.plan_activo ? "<span class='text-green-500 text-lg uppercase'>Activo</span>" : "<span class='text-red-500 text-lg uppercase'>Inactivo</span>   ";
+                    contenidoContrato.innerHTML = `
+                        <h2 class="text-lg font-semibold mb-4" style="color: #2C1F0E;">Contrato N° ${data.contenido.titular.numero_contrato}</h2>
+                        <h3 class=" font-semibold mb-2" style="color: #2C1F0E;">Estado del Contrato: ${planActivo}</h3>
+                        <h4 class="text-sm font-semibold mb-2" style="color: #2C1F0E;">Datos del titular</h4>
+                        <p class="text-xs mb-2" style="color: #5a4a35;">Nombre completo: ${data.contenido.titular.nombre} ${data.contenido.titular.apellido} </p>
+                        <p class="text-xs mb-2" style="color: #5a4a35;">Cédula: ${data.contenido.titular.cedula}</p>
+                        <p class="text-xs mb-2" style="color: #5a4a35;">Sexo: ${data.contenido.titular.sexo}</p>
+                        <p class="text-xs mb-2" style="color: #5a4a35;">Edad: ${data.contenido.titular.edad} años</p> 
+                        <p class="text-xs mb-2" style="color: #5a4a35;">Estado Civil: ${data.contenido.titular.estado_civil}</p>
+                        <p class="text-xs mb-2" style="color: #5a4a35;">Ocupación: ${data.contenido.titular.ocupacion}</p>
+                        <p class="text-xs mb-2" style="color: #5a4a35;">Teléfono: ${data.contenido.titular.telefono}</p>
+                        <p class="text-xs mb-2" style="color: #5a4a35;">Dirección: ${data.contenido.titular.direccion}</p>
+                        <p class="text-xs mb-2" style="color: #5a4a35;">Fecha de ingreso: ${data.contenido.fecha_ingreso}</p>
+                        <h4 class="text-sm font-semibold mb-2" style="color: #2C1F0E;">Beneficiarios:</h4>
+                        <ul class="list-disc pl-5 mb-4">
+                            ${data.contenido.beneficiarios.map(b => `<li class="text-xs" style="color: #5a4a35;">${b.nombre_completo} - Cédula: ${b.cedula} - Parentesco: ${b.parentesco}</li>`).join('')}
+                        </ul>
+
+                        <h4 class="text-sm font-semibold mb-2" style="color: #2C1F0E;">Mascotas:</h4>
+                        <ul class="list-disc pl-5">
+                            ${data.contenido.mascotas.map(m => `<li class="text-xs" style="color: #5a4a35;">${m.nombre} - Especie: ${m.especie} </li>`).join('')}
+                        </ul>
+                    `;
+                }
+            })
+            .catch(error => {
+                console.error("Error cargando el contrato:", error);
+                contenidoContrato.innerHTML = "<p class='text-xs text-[#9a8a70] py-8'>Error al cargar el contrato.</p>";
             });
     }
 

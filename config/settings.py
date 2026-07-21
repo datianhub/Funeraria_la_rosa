@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'theme',
 ]
 
+LOGIN_REDIRECT_URL = '/payments/'
+LOGIN_URL = '/login/'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -143,4 +146,4 @@ STATIC_URL = 'static/'
 TAILWIND_APP_NAME = 'theme'
 
 # settings.py (Al final del archivo)
-NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+NPM_BIN_PATH = r"/home/datian/.nvm/versions/node/v24.18.0/bin/npm"

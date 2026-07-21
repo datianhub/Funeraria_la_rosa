@@ -7,7 +7,6 @@
             <div style="font-size: 20px; font-weight: 500; color: #D4B96A; letter-spacing: 0.04em;">La Rosa</div>
         </div>
 
-        {% comment %} {{-- Navegación --}} {% endcomment %}
         <nav style="padding: 16px 0;">
 
             <div style="font-size: 9px; color: #5a4a35; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 20px; margin-bottom: 6px;">Principal</div>
@@ -61,10 +60,9 @@
 {% comment %} 
     {{-- Footer: usuario + botón --}} {% endcomment %}
     <div style="padding: 16px 20px; border-top: 0.5px solid #3a2e22;">
-        <button onclick="abrirModalTitularRegistro()" style="width:100%; background:#D4B96A; color:#1C1410; font-size:13px; font-weight:500; padding:10px 14px; border-radius:8px; border:none; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; transition: background 0.15s;" onmouseover="this.style.background='#c4a95a'" onmouseout="this.style.background='#D4B96A'">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            Nueva afiliación
-        </button>
+        <a href="{% url 'logout' %}" style="width:100%; background:#D4B96A; color:#1C1410; font-size:13px; font-weight:500; padding:10px 14px; border-radius:8px; border:none; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; transition: background 0.15s;" onmouseover="this.style.background='#c4a95a'" onmouseout="this.style.background='#D4B96A'">
+            Cerrar sesión
+        </a>
     </div>
 
 </aside>

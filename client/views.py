@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.template import loader
 from django.db.models import Q
 from .models import Titular, Beneficiario, Mascota
@@ -6,10 +6,16 @@ from django.http import HttpResponse, JsonResponse
 from .forms import TitularForm, BeneficiarioForm, MascotaForm
 from django.shortcuts import redirect
 from django.core.paginator import Paginator
-from payment.models import Pago
+from payment.models import Pago, Plan
 from payment.views import calcular_monto_plan
 from django.core.paginator import Paginator
 from dateutil.relativedelta import relativedelta
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from payment.forms import PlanForm
+from django.contrib import messages
+from django.forms.models import model_to_dict
 
 
 def titular_list(request):
@@ -162,9 +168,66 @@ def obtener_miembros_paginados(request, titular_id):
         'total_paginas': paginator.num_pages
     })
 
+def obtener_contrato(request, titular_id):
+    titular = get_object_or_404(Titular, id=titular_id)
+    beneficiarios = list(Beneficiario.objects.filter(titular=titular))
+    mascotas = list(Mascota.objects.filter(titular=titular))
+
+    context = {
+        'titular': model_to_dict(titular, fields=['nombre', 'apellido', 'cedula', 'numero_contrato', 'direccion', 'telefono', 'fecha_ingreso', 'plan_activo', 'edad', 'estado_civil', 'ocupacion', 'sexo' ]),
+        'fecha_ingreso': titular.fecha_ingreso.strftime('%d/%m/%Y') if titular.fecha_ingreso else '',
+        'beneficiarios': [model_to_dict(b) for b in beneficiarios],
+        'mascotas': [model_to_dict(m) for m in mascotas],
+    }
+
+    return JsonResponse({'contenido': context})
+
 """
 Vista de Configuración
 """
 def config_dashboard(request):
-    return render(request, "settings/conf.html")
+    configuration = {
+        plan.id: {
+            'valor_mensual': plan.valor_mensual,
+            'valor_mascotas': plan.valor_mascotas,
+            'valor_beneficiario_extra': plan.valor_beneficiario_extra,
+            'valor_cobro_edad': plan.valor_cobro_edad,
+            'edad_maxima': plan.edad_maxima,
+        } for plan in Plan.objects.all()
+    }
+    return render(request, "settings/conf.html", {'configuration': configuration})
+
+def editar_configuracion(request, pk):
+    plan = get_object_or_404(Plan, id=pk)
+    if request.method == 'POST':
+        form = PlanForm(request.POST, instance=plan)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Configuración actualizada correctamente.')
+        return redirect('config')
+    else:
+        form = PlanForm(instance=plan)
+    return render(request, "settings/editplans.html", {'plan': plan, 'form': form})
+
+
+#Vista de login
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('dashboard')
+        else:
+            pass
+    else:
+        form = AuthenticationForm()
     
+    return render(request, 'login/login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
