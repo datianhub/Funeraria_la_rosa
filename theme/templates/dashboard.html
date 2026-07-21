@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Rosa — Panel de Gestión</title>
-    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="font-['Inter',sans-serif] bg-[#F7F4EE] flex h-screen overflow-hidden text-[#2C1F0E]">
@@ -253,13 +253,3 @@
 
 </body>
 </html>
-
-<!--
-  Guía rápida de cómo reescribir tus clases del NAV-ITEM por si las necesitas en "./components/nav.html":
-
-  Clase Base (.nav-item):
-  "flex items-center gap-2.5 px-5 py-2.5 text-[13px] text-[#9a8a70] no-underline border-l-2 border-transparent transition-all duration-150 hover:text-[#D4B96A] hover:bg-white/5"
-
-  Clase Activa (.nav-active):
-  "text-[#D4B96A] bg-[#D4B96A]/10 border-l-2 border-[#D4B96A]"
--->
